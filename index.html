@@ -6,9 +6,17 @@
 <title>AnaCoo Tailor - Modern Bespoke Tailoring</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-<style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins','Noto Sans SC',sans-serif;-webkit-tap-highlight-color:transparent;}
-body{background:#fef9f7;color:#5a4d4d;}
+<style>*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins','Noto Sans SC',sans-serif;-webkit-tap-highlight-color:transparent;}
+body{
+    font-family: Arial, sans-serif;
+    margin: 0;
+
+    background:#fef9f7;
+    color:#5a4d4d;
+
+    /* offset for fixed header (prevents content from hiding under it) */
+
+}
 
 /* MODERN FEMININE COLOR PALETTE */
 :root {
@@ -32,7 +40,7 @@ body{background:#fef9f7;color:#5a4d4d;}
     min-height: 400px;
     position: relative;
     overflow: hidden;
-    margin-top: 80px;
+    margin-top: 0;
     background: var(--dark);
 }
 
@@ -90,16 +98,12 @@ body{background:#fef9f7;color:#5a4d4d;}
     font-weight: 500;
 }
 
-.carousel-nav {
-    position: absolute;
-    top: 50%;
-    left: 0;
-    right: 0;
-    display: flex;
-    justify-content: space-between;
-    padding: 0 20px;
-    z-index: 3;
-    transform: translateY(-50%);
+.carousel-nav#primary-nav {
+display: flex;
+gap: 28px;
+align-items: center;
+margin: 0;
+padding: 0;
 }
 
 .carousel-nav button {
@@ -153,22 +157,41 @@ body{background:#fef9f7;color:#5a4d4d;}
 
 /* Header adjustment for carousel */
 header {
-    background: rgba(109,93,107,0.95);
-    backdrop-filter: blur(10px);
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 1000;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 16px 20px;
+position: sticky;
+top: 0;
+z-index: 1000;
+
+display: flex;
+justify-content: space-between;
+align-items: center;
+
+padding: 4px 60px;
+border-bottom: 1px solid rgba(255,255,255,0.10);
+
+/* Professional, subtle modern background */
+background: linear-gradient(90deg,
+    rgba(109,93,107,0.98) 0%,
+    rgba(98,84,96,0.98) 45%,
+    rgba(109,93,107,0.98) 100%);
+
+backdrop-filter: blur(10px);
+-webkit-backdrop-filter: blur(10px);
+
+box-shadow: 0 8px 22px rgba(0,0,0,0.14);
 }
 
 
 header img.logo {
-    height: 42px;
-    filter: brightness(0) invert(1);
+height: 70px; /* Large, but helps reduce header height */
+width: auto;
+
+/* Soft champagne/rose tint to match header background */
+filter: brightness(0) saturate(100%)
+        invert(82%) sepia(18%)
+        saturate(450%) hue-rotate(320deg);
+drop-shadow(0 3px 8px rgba(0,0,0,0.25));
+
+display: block;
 }
 
 nav {
@@ -177,15 +200,17 @@ nav {
     align-items: center;
 }
 
-nav a {
-    color: var(--white);
-    text-decoration: none;
-    font-size: 13px;
-    font-weight: 500;
-    letter-spacing: 0.5px;
-    transition: all 0.3s ease;
-    padding: 5px 0;
-    position: relative;
+nav#primary-nav a {
+font-size: 15px;
+font-weight: 500;
+color: white;
+text-decoration: none;
+opacity: 0.85;
+transition: 0.3s;
+}
+
+nav#primary-nav a:hover {
+opacity: 1;
 }
 
 nav a:after {
@@ -919,19 +944,24 @@ nav a:hover {
 
 /* LANGUAGE SELECTOR */
 .language-selector {
-    position: fixed;
-    bottom: 30px;
-    right: 20px;
-    background: rgba(255,255,255,0.96);
-    border-radius: 30px;
-    padding: 12px 18px;
-    box-shadow: 0 8px 25px rgba(109,93,107,0.15);
-    z-index: 1000;
-    display: flex;
-    gap: 10px;
-    border: 1px solid var(--accent);
-    transition: all 0.3s ease;
-    backdrop-filter: blur(10px);
+position: fixed;
+top: 10px;
+right: 20px;
+z-index: 2000;
+
+display: flex;
+gap: 10px;
+align-items: center;
+
+padding: 6px 8px;
+border-radius: 999px;
+
+/* subtle glass look on header */
+background: rgba(255,255,255,0.10);
+border: 1px solid rgba(255,255,255,0.22);
+backdrop-filter: blur(10px);
+-webkit-backdrop-filter: blur(10px);
+box-shadow: 0 8px 18px rgba(0,0,0,0.10);
 }
 
 .language-selector:hover {
@@ -940,15 +970,19 @@ nav a:hover {
 }
 
 .lang-btn {
-    padding: 8px 18px;
-    border: none;
-    background: none;
-    border-radius: 20px;
-    font-size: 13px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    color: var(--text);
+border: 1px solid rgba(255,255,255,0.30);
+background: rgba(255,255,255,0.10);
+color: #ffffff;
+
+padding: 7px 12px;
+border-radius: 999px;
+
+font-weight: 600;
+font-size: 13px;
+line-height: 1;
+
+cursor: pointer;
+transition: 0.2s ease;
 }
 
 .lang-btn:hover {
@@ -956,9 +990,8 @@ nav a:hover {
 }
 
 .lang-btn.active {
-    background: var(--primary);
-    color: var(--white);
-    box-shadow: 0 5px 15px rgba(216,167,177,0.3);
+background: rgba(255,255,255,0.22);
+border-color: rgba(255,255,255,0.55);
 }
 
 footer {
@@ -1099,7 +1132,7 @@ body.chinese-lang .map-overlay .chinese {
     }
     .gallery-carousel {
         height: 70vh;
-        margin-top: 70px;
+        margin-top: 0;
     }
     .carousel-overlay h2 {
         font-size: 42px;
@@ -1195,7 +1228,7 @@ body.chinese-lang .map-overlay .chinese {
     .gallery-carousel {
         height: 50vh;
         min-height: 300px;
-        margin-top: 60px;
+        margin-top: 0;
     }
     .carousel-overlay {
         padding: 20px 15px;
@@ -1577,19 +1610,77 @@ body.chinese-lang span.chinese {
     }
 }
 
+
+
+.header-left {
+display: flex;
+align-items: center;
+gap: 26px; /* Space between logo and nav */
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: auto;
+}
+
+/* ✅ Mobile alignment (hamburger + language) */
+@media (max-width: 768px) {
+  header{
+    padding: 10px 14px;
+    align-items: center;
+  }
+
+  .header-left{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  header img.logo{
+    height: 52px;
+  }
+
+  .header-actions{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-left: 0;
+  }
+
+  /* Language pill stays in the header (aligned with hamburger) */
+  .language-selector{
+    position: static;
+    inset: auto;
+    padding: 5px 6px;
+    gap: 8px;
+  }
+
+  .lang-btn{
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+
+  /* Mobile dropdown menu spacing from header */
+  nav#primary-nav{
+    top: 76px;
+  }
+}
 </style>
 </head>
 <body class="english-lang">
 <header>
-<div class="logo-container">
+  <div class="header-left">
+    <div class="logo-container">
    <img class="logo" 
      src="https://raw.githubusercontent.com/JunyxTan/AnaCoo-Project-v2/main/assets/logo.png" 
      alt="AnaCoo Tailor logo" />
 </div>
-<button class="menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="primary-nav">
-    <i class="fas fa-bars" aria-hidden="true"></i>
-</button>
-<nav id="primary-nav">
+    <nav id="primary-nav">
 <a href="#services" class="english">Services</a>
 <a href="#services" class="chinese">服务项目</a>
 <a href="#pricing" class="english">Pricing</a>
@@ -1601,6 +1692,16 @@ body.chinese-lang span.chinese {
 <a href="#contact" class="english">Contact</a>
 <a href="#contact" class="chinese">联系我们</a>
 </nav>
+    <div class="header-actions" aria-label="Header actions">
+      <div class="language-selector">
+  <button type="button" id="btnEnglish" class="lang-btn active" aria-pressed="true">English</button>
+  <button type="button" id="btnChinese" class="lang-btn" aria-pressed="false">中文</button>
+</div>
+      <button class="menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="primary-nav">
+    <i class="fas fa-bars" aria-hidden="true"></i>
+</button>
+    </div>
+  </div>
 </header>
 
 <!-- ANIMATED PHOTO GALLERY CAROUSEL -->
@@ -1649,11 +1750,7 @@ body.chinese-lang span.chinese {
     </div>
 </section>
 
-<!-- Language Selector -->
-<div class="language-selector">
-<button class="lang-btn active" id="btnEnglish">English</button>
-<button class="lang-btn" id="btnChinese">中文</button>
-</div>
+
 
 <section class="hero">
 <div>
@@ -2368,36 +2465,45 @@ carousel.addEventListener('touchend', () => { if (!prefersReducedMotion) startAu
 document.addEventListener('DOMContentLoaded', initCarousel);
 
 // Language switching functions
-function switchToEnglish() {
-    document.body.className = 'english-lang';
-    document.getElementById('btnEnglish').classList.add('active');
-    document.getElementById('btnChinese').classList.remove('active');
-    document.documentElement.lang = 'en';
-    document.title = 'AnaCoo Tailor - Modern Bespoke Tailoring';
-    console.log('Switched to English');
+const btnEnglish = document.getElementById('btnEnglish');
+const btnChinese = document.getElementById('btnChinese');
+
+function setLanguage(lang) {
+    // Preserve other body classes (e.g., nav-open), only toggle language classes
+    document.body.classList.remove('english-lang', 'chinese-lang');
+    document.body.classList.add(lang === 'zh' ? 'chinese-lang' : 'english-lang');
+
+    if (btnEnglish && btnChinese) {
+        const isZh = (lang === 'zh');
+        btnEnglish.classList.toggle('active', !isZh);
+        btnChinese.classList.toggle('active', isZh);
+        btnEnglish.setAttribute('aria-pressed', String(!isZh));
+        btnChinese.setAttribute('aria-pressed', String(isZh));
+    }
+
+    document.documentElement.lang = (lang === 'zh') ? 'zh-CN' : 'en';
+    document.title = (lang === 'zh') ? 'AnaCoo Tailor - 现代高级定制' : 'AnaCoo Tailor - Modern Bespoke Tailoring';
 }
 
-function switchToChinese() {
-    document.body.className = 'chinese-lang';
-    document.getElementById('btnChinese').classList.add('active');
-    document.getElementById('btnEnglish').classList.remove('active');
-    document.documentElement.lang = 'zh-CN';
-    document.title = 'AnaCoo Tailor - 现代高级定制';
-    console.log('Switched to Chinese');
-}
+function switchToEnglish() { setLanguage('en'); }
+function switchToChinese() { setLanguage('zh'); }
 
 // Add both click and touch events for iOS compatibility
-document.getElementById('btnEnglish').addEventListener('click', switchToEnglish);
-document.getElementById('btnEnglish').addEventListener('touchstart', function(e) {
-    e.preventDefault();
-    switchToEnglish();
-}, { passive: false });
+if (btnEnglish) {
+    btnEnglish.addEventListener('click', switchToEnglish);
+    btnEnglish.addEventListener('touchstart', function (e) {
+        e.preventDefault();
+        switchToEnglish();
+    }, { passive: false });
+}
 
-document.getElementById('btnChinese').addEventListener('click', switchToChinese);
-document.getElementById('btnChinese').addEventListener('touchstart', function(e) {
-    e.preventDefault();
-    switchToChinese();
-}, { passive: false });
+if (btnChinese) {
+    btnChinese.addEventListener('click', switchToChinese);
+    btnChinese.addEventListener('touchstart', function (e) {
+        e.preventDefault();
+        switchToChinese();
+    }, { passive: false });
+}
 
 // Smooth scrolling
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
