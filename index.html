@@ -4,40 +4,10 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/>
-<meta name="description" content="AnaCoo Tailor provides premium alterations and bespoke tailoring for modern women in Johor Bahru (R&F Princess Cove). Services include hemming, resizing, dress & skirt alterations, curtain hemming, custom bedsheets, and zipper replacement. Appointment only."/>
-<meta name="robots" content="index,follow,max-image-preview:large"/>
-<link rel="canonical" href="https://anacoo.com/"/>
-
-<!-- Open Graph / Facebook -->
-<meta property="og:type" content="website"/>
-<meta property="og:title" content="AnaCoo Tailor | Alterations & Bespoke Tailoring in Johor Bahru"/>
-<meta property="og:description" content="Premium alterations and bespoke tailoring for modern women at R&F Princess Cove, Johor Bahru. Appointment only."/>
-<meta property="og:url" content="https://anacoo.com/"/>
-<meta property="og:image" content="https://raw.githubusercontent.com/JunyxTan/AnaCoo-Project-v2/main/assets/Img%202.jpeg"/>
-
-<!-- Twitter -->
-<meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:title" content="AnaCoo Tailor | Alterations & Bespoke Tailoring in Johor Bahru"/>
-<meta name="twitter:description" content="Premium alterations and bespoke tailoring for modern women at R&F Princess Cove, Johor Bahru. Appointment only."/>
-<meta name="twitter:image" content="https://raw.githubusercontent.com/JunyxTan/AnaCoo-Project-v2/main/assets/Img%202.jpeg"/>
-
-<!-- Language targeting (same URL; use separate URLs if you later split /en and /zh) -->
-<link rel="alternate" hreflang="en" href="https://anacoo.com/"/>
-<link rel="alternate" hreflang="zh-Hans" href="https://anacoo.com/"/>
-<link rel="alternate" hreflang="x-default" href="https://anacoo.com/"/>
-
-<title>AnaCoo Tailor | Alterations & Bespoke Tailoring in Johor Bahru</title>
+<title>AnaCoo Tailor - Modern Bespoke Tailoring</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&amp;family=Noto+Sans+SC:wght@300;400;500;700&amp;display=swap" rel="stylesheet"/>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
-<style>/* Visually hidden (keeps SEO/Accessibility headings in DOM) */
-.sr-only{
-  position:absolute!important;
-  width:1px!important;height:1px!important;
-  padding:0!important;margin:-1px!important;
-  overflow:hidden!important;clip:rect(0,0,0,0)!important;
-  white-space:nowrap!important;border:0!important;
-}
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins','Noto Sans SC',sans-serif;-webkit-tap-highlight-color:transparent;}
+<style>*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins','Noto Sans SC',sans-serif;-webkit-tap-highlight-color:transparent;}
 body{
     font-family: Arial, sans-serif;
     margin: 0;
@@ -958,6 +928,109 @@ nav a:hover {
     color: var(--primary);
 }
 
+.map-actions{
+    display:flex;
+    gap:12px;
+    justify-content:center;
+    align-items:stretch;
+    flex-wrap:wrap;
+    margin-top:12px;
+}
+.map-actions a{
+    flex:1;
+    min-width:150px;
+    max-width:220px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    height:44px;
+    padding:0 18px;
+    border-radius:20px;
+    font-size:13px;
+    font-weight:600;
+    white-space:nowrap;
+}
+
+.map-waze-btn{background:#000;color:#fff;border:2px solid #000;}
+.map-waze-btn:hover{background:transparent;color:#000;}
+
+.map-actions a{
+    flex:1;
+    min-width:150px;
+    max-width:220px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    height:46px;
+    padding:0 18px;
+    border-radius:999px;
+    font-size:13px;
+    font-weight:600;
+    white-space:nowrap;
+    box-shadow:0 8px 18px rgba(0,0,0,0.18);
+}
+.map-directions-btn{
+    background:rgba(216,178,90,0.18);
+    border:1.5px solid rgba(216,178,90,0.75);
+    color:#d8b25a;
+}
+.map-directions-btn:hover{
+    background:rgba(216,178,90,0.28);
+}
+.map-waze-btn{
+    background:#0b0a08;
+    border:1.5px solid rgba(216,178,90,0.55);
+    color:#fff;
+}
+.map-waze-btn:hover{
+    background:rgba(216,178,90,0.12);
+    color:#fff;
+}
+
+/* MAP BUTTON ALIGNMENT OVERRIDE */
+.map-actions{
+  align-items:stretch;
+}
+.map-actions a{
+  box-sizing:border-box;
+  height:48px;
+  padding:0 !important;
+  line-height:1;
+  text-decoration:none !important;
+}
+.map-actions a span{
+  line-height:1;
+}
+.map-directions-btn,
+.map-waze-btn{
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+}
+
+/* CHROME DESKTOP MAP BUTTON FIX */
+.map-actions{align-items:stretch;}
+.map-actions a{
+  box-sizing:border-box;
+  height:48px;
+  padding:0 !important;
+  line-height:1;
+  text-decoration:none !important;
+  -webkit-font-smoothing:antialiased;
+  font-weight:600;
+}
+.map-directions-btn,.map-waze-btn{
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  border-width:1.5px !important;
+  border-style:solid !important;
+}
+.map-directions-btn span,.map-waze-btn span{
+  display:block;
+  line-height:1;
+}
+
 /* SOCIAL ICONS FIX */
 .social-icons a {
     display: inline-block;
@@ -1782,63 +1855,91 @@ p{margin:0 0 12px;}
   padding-bottom: 4px;
 }
 
-</style>
 
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "ClothingStore",
-  "name": "AnaCoo Tailor",
-  "url": "https://anacoo.com/",
-  "image": [
-    "https://raw.githubusercontent.com/JunyxTan/AnaCoo-Project-v2/main/assets/Img%202.jpeg",
-    "https://raw.githubusercontent.com/JunyxTan/AnaCoo-Project-v2/main/assets/logo.png"
-  ],
-  "telephone": "+60123608968",
-  "email": "CooAna9s@gmail.com",
-  "address": {
-    "@type": "PostalAddress",
-    "addressLocality": "Johor Bahru",
-    "addressRegion": "Johor",
-    "addressCountry": "MY",
-    "streetAddress": "R&F Princess Cove"
-  },
-  "geo": {
-    "@type": "GeoCoordinates",
-    "latitude": 1.4592273,
-    "longitude": 103.7694807
-  },
-  "openingHoursSpecification": [
-    {
-      "@type": "OpeningHoursSpecification",
-      "dayOfWeek": [
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday",
-        "Saturday",
-        "Sunday"
-      ],
-      "opens": "11:00",
-      "closes": "22:00"
-    }
-  ],
-  "priceRange": "RM10–RM25 (typical alterations)",
-  "knowsLanguage": [
-    "en",
-    "zh"
-  ],
-  "sameAs": [
-    "https://maps.app.goo.gl/vXpEtm1sTcqQWG5T9"
-  ]
+/* FINAL MAP BUTTON ALIGNMENT (wins over earlier styles) */
+.map-actions{
+  display:flex;
+  align-items:stretch;
 }
-</script>
+.map-actions > a.map-directions-btn,
+.map-actions > a.map-waze-btn{
+  flex:1 1 0;
+  max-width:220px;
+  min-width:150px;
+  height:52px !important;
+  padding:0 !important;
+  box-sizing:border-box;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  border-radius:999px !important;
+  line-height:1 !important;
+  text-decoration:none !important;
+  box-shadow:0 10px 22px rgba(0,0,0,0.18) !important;
+}
+.map-actions > a.map-directions-btn{
+  border:1.5px solid rgba(216,178,90,0.75) !important;
+  background:rgba(216,178,90,0.18) !important;
+  color:#d8b25a !important;
+}
+.map-actions > a.map-waze-btn{
+  border:1.5px solid rgba(216,178,90,0.55) !important;
+  background:#0b0a08 !important;
+  color:#fff !important;
+}
+.map-actions > a.map-directions-btn span,
+.map-actions > a.map-waze-btn span{
+  display:block;
+  line-height:1 !important;
+  text-decoration:none !important;
+}
 
+
+/* HARD RESET FOR MAP BUTTONS (fix leftover margins/padding) */
+.map-actions > a.map-directions-btn,
+.map-actions > a.map-waze-btn{
+  margin:0 !important;
+}
+.map-actions{
+  padding:0 !important;
+}
+
+.map-directions-btn,
+.map-waze-btn{
+  margin:0 !important;
+  position:relative;
+  top:0;
+}
+
+
+/* Floating WhatsApp Button */
+.floating-whatsapp{
+  position:fixed;
+  right:18px;
+  bottom:18px;
+  z-index:9999;
+  width:56px;
+  height:56px;
+  border-radius:999px;
+  background:#25D366;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  box-shadow:0 14px 30px rgba(0,0,0,0.28);
+  text-decoration:none;
+}
+.floating-whatsapp:hover{
+  transform:translateY(-2px);
+}
+.floating-whatsapp svg{
+  width:28px;
+  height:28px;
+  fill:#fff;
+}
+
+</style>
 </head>
 <body class="english-lang">
-<h1 class="sr-only">AnaCoo Tailor — Alterations & Bespoke Tailoring in Johor Bahru (R&F Princess Cove)</h1>
-
 <header>
 <div class="header-left">
 <div class="logo-container">
@@ -2310,10 +2411,13 @@ p{margin:0 0 12px;}
 <h5 class="chinese">我们的位置</h5>
 <p class="english">R&amp;F Princess Cove, Johor Bahru</p>
 <p class="chinese">柔佛新山，富力公主湾</p>
+<div class="map-actions">
 <a class="map-directions-btn" href="https://maps.app.goo.gl/vXpEtm1sTcqQWG5T9" target="_blank">
-<span class="english">Get Directions</span>
-<span class="chinese">获取路线</span>
+<span class="english">Google Map</span>
+<span class="chinese">谷歌地图</span>
 </a>
+<a class="map-waze-btn" href="https://waze.com/ul?q=R%26F%20Princess%20Cove%20Johor%20Bahru&navigate=yes" target="_blank"><span class="english">Waze</span><span class="chinese">Waze导航</span></a>
+</div>
 </div>
 </div>
 </div>
@@ -2680,5 +2784,16 @@ window.addEventListener('load', function() {
   }
 })();
 </script>
+
+<!-- Floating WhatsApp Button -->
+<a class="floating-whatsapp"
+   href="https://wa.me/60123608968"
+   target="_blank"
+   aria-label="Chat on WhatsApp">
+   <svg viewBox="0 0 32 32" aria-hidden="true">
+     <path d="M19.11 17.53c-.27-.14-1.6-.79-1.85-.88-.25-.09-.43-.14-.61.14-.18.27-.7.88-.86 1.06-.16.18-.32.2-.59.07-.27-.14-1.16-.43-2.2-1.37-.81-.72-1.36-1.61-1.52-1.88-.16-.27-.02-.42.12-.56.12-.12.27-.32.41-.48.14-.16.18-.27.27-.45.09-.18.05-.34-.02-.48-.07-.14-.61-1.47-.84-2.01-.22-.53-.44-.46-.61-.47h-.52c-.18 0-.48.07-.73.34-.25.27-.95.93-.95 2.27 0 1.34.98 2.63 1.11 2.81.14.18 1.93 2.95 4.67 4.13.65.28 1.16.45 1.55.58.65.21 1.24.18 1.71.11.52-.08 1.6-.65 1.83-1.27.23-.62.23-1.15.16-1.27-.07-.11-.25-.18-.52-.32zM16.04 3C9.4 3 4 8.4 4 15.04c0 2.34.68 4.52 1.86 6.36L4 29l7.79-1.8a12 12 0 0 0 4.25.77C22.68 28 28.08 22.6 28.08 15.96 28.08 9.32 22.68 3 16.04 3zm0 22.07c-1.37 0-2.7-.29-3.93-.86l-.28-.13-4.62 1.07 1.02-4.5-.14-.29a9.92 9.92 0 0 1-1.06-4.38c0-5.52 4.49-10.01 10.01-10.01s10.01 4.49 10.01 10.01-4.49 10.01-10.01 10.01z"/>
+   </svg>
+</a>
+
 </body>
 </html>
