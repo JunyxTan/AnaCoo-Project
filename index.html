@@ -81,7 +81,7 @@ body{
     left: 0;
     right: 0;
     background: linear-gradient(to top, rgba(109,93,107,0.9), transparent);
-    padding: 40px 20px;
+    padding: 40px 20px 80px;
     z-index: 2;
     text-align: center;
 }
@@ -998,7 +998,7 @@ footer {
     background: linear-gradient(rgba(109,93,107,0.96), rgba(109,93,107,0.96)),
                 url('https://images.unsplash.com/photo-1552902865-b72c031ac5ea?auto=format&fit=crop&w=1600&q=80') center/cover;
     color: var(--white);
-    padding: 40px 20px;
+    padding: 40px 20px 80px;
     text-align: center;
     font-size: 13px;
 }
@@ -1231,13 +1231,22 @@ body.chinese-lang .map-overlay .chinese {
         margin-top: 0;
     }
     .carousel-overlay {
-        padding: 20px 15px;
+        padding: 20px 15px 65px;
     }
     .carousel-overlay h2 {
         font-size: 24px;
     }
     .carousel-overlay .subtitle {
         font-size: 16px;
+    }
+    /* Keep carousel dots from blocking text on small screens */
+    .carousel-dots {
+        bottom: calc(env(safe-area-inset-bottom) + 10px);
+        gap: 6px;
+    }
+    .carousel-dot {
+        width: 8px;
+        height: 8px;
     }
     .carousel-nav button {
         width: 40px;
