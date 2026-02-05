@@ -3602,7 +3602,7 @@ html, body{
 <a class="btn appointment-btn" data-disabled="true" href="https://wa.me/60123608968" id="whatsappBookBtn">Pilih tarikh &amp; masa untuk teruskan</a>
 </div>
 </div>
-</div></div></section><section class="section appointment-section" id="appointment"><div class="container"></div></section><section class="contact-info" id="contact">
+</div></div></section><section class="contact-info" id="contact">
 <h4 class="english">Contact Information</h4>
 <h4 class="chinese">联系信息</h4>
 <h4 class="malay">Maklumat Hubungan</h4>
@@ -3816,8 +3816,26 @@ html, body{
       // mark active
       const active = dropdown.querySelector(`.time-option[data-value="${timeHidden.value}"]`);
       if(active) active.classList.add('active');
-      displayBtn.querySelectorAll('.time-display-text').forEach(el => el.textContent = timeHidden.value);
+
+      const [hh, mm] = timeHidden.value.split(':').map(Number);
+      const pretty = to12h(hh, mm);
+      displayBtn.querySelectorAll('.time-display-text').forEach(el => el.textContent = pretty);
     }
+  }
+
+  function ensureSelectableDate(){
+    const selectedDate = dateEl.value ? new Date(dateEl.value + 'T00:00:00') : null;
+    if(!selectedDate) return;
+
+    const slots = buildSlots(selectedDate);
+    if(slots.length) return;
+
+    const nextDate = new Date(selectedDate);
+    nextDate.setDate(nextDate.getDate() + 1);
+    const fmt = d => `${d.getFullYear()}-${pad2(d.getMonth()+1)}-${pad2(d.getDate())}`;
+
+    if(dateEl.max && fmt(nextDate) > dateEl.max) return;
+    dateEl.value = fmt(nextDate);
   }
 
   function updateWhatsAppLink(){
@@ -3920,6 +3938,7 @@ Sila maklumkan jika slot ini tersedia. Terima kasih.`;
 
   // Init
   setDateBounds();
+  ensureSelectableDate();
   renderTimeOptions();
   updateWhatsAppLink();
 
