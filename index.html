@@ -3827,15 +3827,20 @@ html, body{
     const selectedDate = dateEl.value ? new Date(dateEl.value + 'T00:00:00') : null;
     if(!selectedDate) return;
 
-    const slots = buildSlots(selectedDate);
-    if(slots.length) return;
-
-    const nextDate = new Date(selectedDate);
-    nextDate.setDate(nextDate.getDate() + 1);
     const fmt = d => `${d.getFullYear()}-${pad2(d.getMonth()+1)}-${pad2(d.getDate())}`;
+    const maxDate = dateEl.max ? new Date(dateEl.max + 'T00:00:00') : null;
+    const probe = new Date(selectedDate);
 
-    if(dateEl.max && fmt(nextDate) > dateEl.max) return;
-    dateEl.value = fmt(nextDate);
+    while(true){
+      const slots = buildSlots(probe);
+      if(slots.length){
+        dateEl.value = fmt(probe);
+        return;
+      }
+
+      probe.setDate(probe.getDate() + 1);
+      if(maxDate && probe > maxDate) return;
+    }
   }
 
   function updateWhatsAppLink(){
@@ -3901,8 +3906,8 @@ Saya ingin membuat temu janji untuk perkhidmatan ubah suai pakaian.
 
 Sila maklumkan jika slot ini tersedia. Terima kasih.`;
 
-    const lang = currentLang();
-    const raw = lang === 'zh' ? rawZh : (lang === 'ms' ? rawMs : rawEn);
+    const messageLang = currentLang();
+    const raw = messageLang === 'zh' ? rawZh : (messageLang === 'ms' ? rawMs : rawEn);
 
     try{
       const url = new URL(waBtn.href);
@@ -3943,6 +3948,7 @@ Sila maklumkan jika slot ini tersedia. Terima kasih.`;
   updateWhatsAppLink();
 
   dateEl.addEventListener('change', () => {
+    ensureSelectableDate();
     renderTimeOptions();
     updateWhatsAppLink();
   });
