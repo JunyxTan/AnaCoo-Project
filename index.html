@@ -3852,6 +3852,51 @@ Thank you.`;
 </script>
 <script>
 /* ================================= */
+/* Mobile nav menu toggle            */
+/* ================================= */
+(function(){
+  const menuToggle = document.querySelector('.menu-toggle');
+  const nav = document.getElementById('primary-nav');
+  if(!menuToggle || !nav) return;
+
+  function setMenuOpen(open){
+    document.body.classList.toggle('nav-open', open);
+    menuToggle.setAttribute('aria-expanded', String(open));
+    menuToggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+  }
+
+  menuToggle.addEventListener('click', (e) => {
+    e.stopPropagation();
+    setMenuOpen(!document.body.classList.contains('nav-open'));
+  });
+
+  nav.addEventListener('click', (e) => {
+    if(!e.target.closest('a')) return;
+    setMenuOpen(false);
+  });
+
+  document.addEventListener('click', (e) => {
+    if(!document.body.classList.contains('nav-open')) return;
+    if(nav.contains(e.target) || menuToggle.contains(e.target)) return;
+    setMenuOpen(false);
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if(e.key !== 'Escape') return;
+    setMenuOpen(false);
+  });
+
+  window.addEventListener('resize', () => {
+    if(window.innerWidth > 768){
+      setMenuOpen(false);
+    }
+  });
+
+  setMenuOpen(false);
+})();
+</script>
+<script>
+/* ================================= */
 /* Language toggle (English / 中文)   */
 /* ================================= */
 (function(){
