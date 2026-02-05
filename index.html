@@ -1117,36 +1117,53 @@ footer .social-icons a:hover {
 /* LANGUAGE SWITCHING - FIXED FOR iOS SAFARI */
 /* =========================================== */
 
-/* Default state: English shown, Chinese hidden */
-.chinese {
+/* Default state: English shown, Chinese & Malay hidden */
+.chinese,
+.malay {
     display: none !important;
 }
 
-/* When Chinese language class is applied to body */
-body.chinese-lang .english {
+/* Chinese mode */
+body.lang-zh .english,
+body.lang-zh .malay {
     display: none !important;
 }
 
-body.chinese-lang .chinese {
+body.lang-zh .chinese {
+    display: block !important;
+}
+
+/* Malay mode */
+body.lang-ms .english,
+body.lang-ms .chinese {
+    display: none !important;
+}
+
+body.lang-ms .malay {
     display: block !important;
 }
 
 /* Special handling for inline elements */
-body.chinese-lang span.chinese,
+body.lang-zh span.chinese,
+body.lang-ms span.malay,
 .chinese[style*="inline"],
 .chinese.inline {
     display: inline !important;
 }
 
 /* For specific element types */
-body.chinese-lang .chinese.service-name,
-body.chinese-lang .chinese.note,
-body.chinese-lang .chinese.subtitle {
+body.lang-zh .chinese.service-name,
+body.lang-zh .chinese.note,
+body.lang-zh .chinese.subtitle,
+body.lang-ms .malay.service-name,
+body.lang-ms .malay.note,
+body.lang-ms .malay.subtitle {
     display: block !important;
 }
 
 /* Ensure buttons are visible and aligned */
-body.chinese-lang .chinese.btn {
+body.lang-zh .chinese.btn,
+body.lang-ms .malay.btn {
     display: inline-block !important;
     min-width: 180px;
 }
@@ -1174,30 +1191,40 @@ body.chinese-lang .chinese.btn {
 }
 
 /* Fix for navigation links on iOS */
-body.chinese-lang nav a.chinese {
+body.lang-zh nav a.chinese,
+body.lang-ms nav a.malay {
     display: inline-block !important;
 }
 
 /* Fix for price table headers */
-body.chinese-lang .table-header .chinese {
+body.lang-zh .table-header .chinese,
+body.lang-ms .table-header .malay {
     display: block !important;
 }
 
 /* Carousel language switching */
-body.chinese-lang .carousel-overlay .english {
+body.lang-zh .carousel-overlay .english,
+body.lang-ms .carousel-overlay .english {
     display: none !important;
 }
 
-body.chinese-lang .carousel-overlay .chinese {
+body.lang-zh .carousel-overlay .chinese {
+    display: block !important;
+}
+body.lang-ms .carousel-overlay .malay {
     display: block !important;
 }
 
 /* Map overlay language switching */
-body.chinese-lang .map-overlay .english {
+body.lang-zh .map-overlay .english,
+body.lang-ms .map-overlay .english {
     display: none !important;
 }
 
-body.chinese-lang .map-overlay .chinese {
+body.lang-zh .map-overlay .chinese {
+    display: block !important;
+}
+body.lang-ms .map-overlay .malay {
     display: block !important;
 }
 
@@ -1411,23 +1438,31 @@ body.chinese-lang .map-overlay .chinese {
 /* ============================= */
 /* Chinese typography tweaks      */
 /* ============================= */
-body.chinese-lang .chinese {
+body.lang-zh .chinese {
     letter-spacing: 0;
 }
 
-body.chinese-lang h2.chinese,
-body.chinese-lang h3.chinese,
-body.chinese-lang h4.chinese,
-body.chinese-lang p.chinese,
-body.chinese-lang .subtitle.chinese,
-body.chinese-lang .service-name .chinese,
-body.chinese-lang .note.chinese {
+body.lang-zh h2.chinese,
+body.lang-zh h3.chinese,
+body.lang-zh h4.chinese,
+body.lang-zh p.chinese,
+body.lang-zh .subtitle.chinese,
+body.lang-zh .service-name .chinese,
+body.lang-zh .note.chinese,
+body.lang-ms h2.malay,
+body.lang-ms h3.malay,
+body.lang-ms h4.malay,
+body.lang-ms p.malay,
+body.lang-ms .subtitle.malay,
+body.lang-ms .service-name .malay,
+body.lang-ms .note.malay {
     font-weight: 500;
     line-height: 1.75;
 }
 
 /* Keep only span.chinese inline; block elements remain block */
-body.chinese-lang span.chinese {
+body.lang-zh span.chinese,
+body.lang-ms span.malay {
     display: inline !important;
 }
 
@@ -2377,8 +2412,9 @@ a[data-disabled="true"]{
   box-shadow: 0 0 0 4px rgba(216,167,177,0.18), inset 0 1px 0 rgba(255,255,255,0.65);
 }
 .time-display-text{ display:none; }
-body:not(.chinese-lang) .time-display-text.english{ display:inline; }
-body.chinese-lang .time-display-text.chinese{ display:inline; }
+body.lang-en .time-display-text.english{ display:inline; }
+body.lang-zh .time-display-text.chinese{ display:inline; }
+body.lang-ms .time-display-text.malay{ display:inline; }
 
 .time-dropdown{
   position:absolute;
@@ -3027,7 +3063,7 @@ html, body{
 
 </style>
 </head>
-<body class="english-lang">
+<body class="lang-en">
 <header>
 <div class="header-left">
 <div class="logo-container">
@@ -3036,21 +3072,28 @@ html, body{
 <nav id="primary-nav">
 <a class="english" href="#home">Home</a>
 <a class="chinese" href="#home">首页</a>
+<a class="malay" href="#home">Utama</a>
 <a class="english" href="#services">Services</a>
 <a class="chinese" href="#services">服务项目</a>
+<a class="malay" href="#services">Perkhidmatan</a>
 <a class="english" href="#pricing">Pricing</a>
 <a class="chinese" href="#pricing">价格表</a>
+<a class="malay" href="#pricing">Harga</a>
 <a class="english" href="#payment">Payment</a>
 <a class="chinese" href="#payment">支付方式</a>
+<a class="malay" href="#payment">Bayaran</a>
 <a class="english" href="#faqs">FAQ</a>
 <a class="chinese" href="#faqs">常见问题</a>
+<a class="malay" href="#faqs">Soalan Lazim</a>
 <a class="english nav-appointment-link" href="#appointment">Make Appointment</a><a class="english" href="#contact">Contact</a>
 <a class="chinese nav-appointment-link" href="#appointment">预约</a><a class="chinese" href="#contact">联系我们</a>
+<a class="malay nav-appointment-link" href="#appointment">Tempah Janji</a><a class="malay" href="#contact">Hubungi</a>
 </nav>
 <div aria-label="Header actions" class="header-actions">
 <div class="language-selector">
 <button aria-pressed="true" class="lang-btn active" id="btnEnglish" type="button">English</button>
 <button aria-pressed="false" class="lang-btn" id="btnChinese" type="button">中文</button>
+<button aria-pressed="false" class="lang-btn" id="btnMalay" type="button">Bahasa Melayu</button>
 </div>
 <button aria-controls="primary-nav" aria-expanded="false" aria-label="Open menu" class="menu-toggle">
 <i aria-hidden="true" class="fas fa-bars"></i>
@@ -3113,6 +3156,7 @@ html, body{
 <section class="section services-section" id="services">
 <h3 class="english">Our Services</h3>
 <h3 class="chinese">服务项目</h3>
+<h3 class="malay">Perkhidmatan Kami</h3>
 <div class="services">
 <div class="card">
 <h4 class="english">Basic Clothing Alterations</h4>
@@ -3391,6 +3435,7 @@ html, body{
 <section class="section faqs-section" id="faqs">
 <h3 class="english">FAQs</h3>
 <h3 class="chinese">常见问题</h3>
+<h3 class="malay">Soalan Lazim</h3>
 <div class="faqs faqs-static">
 <div class="card faq-item">
 <div class="faq-q">
@@ -3460,16 +3505,19 @@ html, body{
 <div class="appt-field">
 <label class="english" for="apptDate">Select date</label>
 <label class="chinese" for="apptDate">选择日期</label>
+<label class="malay" for="apptDate">Pilih tarikh</label>
 <input id="apptDate" name="apptDate" type="date"/>
 </div>
 <div class="appt-field">
 <label class="english" for="apptTime">Select time</label>
 <label class="chinese" for="apptTime">选择时间</label>
+<label class="malay" for="apptTime">Pilih masa</label>
 <div class="time-picker" id="timePicker">
 <input id="apptTime" name="apptTime" type="hidden" value=""/>
 <button aria-expanded="false" aria-haspopup="listbox" class="time-display" id="apptTimeDisplay" type="button">
 <span class="time-display-text english">Choose a time</span>
 <span class="time-display-text chinese">请选择时间</span>
+<span class="time-display-text malay">Pilih masa</span>
 <span aria-hidden="true" class="time-caret">▾</span>
 </button>
 <div aria-label="Time slots" class="time-dropdown" id="apptTimeDropdown" role="listbox"></div>
@@ -3483,6 +3531,7 @@ html, body{
 </div></div></section><section class="section appointment-section" id="appointment"><div class="container"></div></section><section class="contact-info" id="contact">
 <h4 class="english">Contact Information</h4>
 <h4 class="chinese">联系信息</h4>
+<h4 class="malay">Maklumat Hubungan</h4>
 <div class="contact-content">
 <!-- Contact Details -->
 <div class="contact-details">
@@ -3523,12 +3572,14 @@ html, body{
 <div class="map-overlay">
 <h5 class="english">Our Location</h5>
 <h5 class="chinese">我们的位置</h5>
+<h5 class="malay">Lokasi Kami</h5>
 <p class="english">R&amp;F Princess Cove, Johor Bahru</p>
 <p class="chinese">柔佛新山，富力公主湾</p>
 <div class="map-actions">
 <a class="map-directions-btn" href="https://maps.app.goo.gl/vXpEtm1sTcqQWG5T9" target="_blank">
 <span class="english">Google Map</span>
 <span class="chinese">谷歌地图</span>
+<span class="malay">Peta Google</span>
 </a>
 <a class="map-waze-btn" href="https://waze.com/ul?ll=1.4590,103.7679&amp;navigate=yes" target="_blank"><span class="english">Waze</span><span class="chinese">Waze导航</span></a>
 </div>
@@ -3540,6 +3591,7 @@ html, body{
 <footer>
 <div class="english">© 2026 AnaCoo Tailor · Modern Bespoke Tailoring</div>
 <div class="chinese">© 2026 安娜库定制裁缝 · 现代高级定制</div>
+<div class="malay">© 2026 AnaCoo Tailor · Jahitan Tempahan Moden</div>
 <div class="social-icons">
 <a aria-label="Instagram" href="https://www.instagram.com/anacoo_tailor?igsh=YTN2YnkxdDl2YnY5&utm_source=qr"><i aria-hidden="true" class="fab fa-instagram"></i></a>
 <a aria-label="Facebook" href="https://www.facebook.com/share/1C6ar95j1t/?mibextid=wwXIfr"><i aria-hidden="true" class="fab fa-facebook"></i></a>
@@ -3565,7 +3617,11 @@ html, body{
 
   const pad2 = n => String(n).padStart(2,'0');
 
-  function isChinese(){ return document.body.classList.contains('chinese-lang'); }
+  function currentLang(){
+    if(document.body.classList.contains('lang-zh')) return 'zh';
+    if(document.body.classList.contains('lang-ms')) return 'ms';
+    return 'en';
+  }
 
   function to12h(h, m){
     const ampm = h >= 12 ? 'PM' : 'AM';
@@ -3633,7 +3689,7 @@ html, body{
       const empty = document.createElement('div');
       empty.style.padding = '10px 10px';
       empty.style.opacity = '0.7';
-      empty.textContent = isChinese() ? '今天已无可选时段' : 'No available slots today';
+      empty.textContent = currentLang() === 'zh' ? '今天已无可选时段' : (currentLang() === 'ms' ? 'Tiada slot tersedia hari ini' : 'No available slots today');
       dropdown.appendChild(empty);
       timeHidden.value = '';
       updateWhatsAppLink();
@@ -3677,6 +3733,8 @@ html, body{
       timeHidden.value = '';
       displayBtn.querySelector('.time-display-text.english').textContent = 'Choose a time';
       displayBtn.querySelector('.time-display-text.chinese').textContent = '请选择时间';
+      const msEl = displayBtn.querySelector('.time-display-text.malay');
+      if(msEl) msEl.textContent = 'Pilih masa';
     }else{
       // mark active
       const active = dropdown.querySelector(`.time-option[data-value="${timeHidden.value}"]`);
@@ -3693,16 +3751,20 @@ html, body{
 
     const labelDisabledEn = 'Select date & time to continue';
     const labelDisabledZh = '请选择日期与时间';
+    const labelDisabledMs = 'Pilih tarikh & masa untuk teruskan';
     const labelEnabledEn  = 'Confirm Appointment via WhatsApp';
     const labelEnabledZh  = '通过 WhatsApp 确认预约';
+    const labelEnabledMs  = 'Sahkan Temu Janji melalui WhatsApp';
 
     if(!dateVal || !timeVal){
       waBtn.dataset.disabled = 'true';
-      waBtn.innerText = isChinese() ? labelDisabledZh : labelDisabledEn;
+      const lang = currentLang();
+      waBtn.innerText = lang === 'zh' ? labelDisabledZh : (lang === 'ms' ? labelDisabledMs : labelDisabledEn);
       return;
     }
     waBtn.dataset.disabled = 'false';
-    waBtn.innerText = isChinese() ? labelEnabledZh : labelEnabledEn;
+    const lang = currentLang();
+    waBtn.innerText = lang === 'zh' ? labelEnabledZh : (lang === 'ms' ? labelEnabledMs : labelEnabledEn);
 
     const niceDate = formatDatePretty(dateVal);
 
@@ -3734,7 +3796,18 @@ Please let me know if this slot is available. Thank you.`;
 
 请帮我确认这个时间是否可以，谢谢。`;
 
-    const raw = isChinese() ? rawZh : rawEn;
+    const rawMs =
+`Hai AnaCoo Tailor,
+
+Saya ingin membuat temu janji untuk perkhidmatan ubah suai pakaian.
+
+✧ Tarikh: ${niceDate}
+✧ Masa: ${formattedTime}
+
+Sila maklumkan jika slot ini tersedia. Terima kasih.`;
+
+    const lang = currentLang();
+    const raw = lang === 'zh' ? rawZh : (lang === 'ms' ? rawMs : rawEn);
 
     try{
       const url = new URL(waBtn.href);
@@ -3750,7 +3823,8 @@ Please let me know if this slot is available. Thank you.`;
     if(!waBtn) return;
     if(waBtn.dataset.disabled === 'true'){
       e.preventDefault();
-      alert(isChinese() ? '请选择预约日期和时间。' : 'Please select an appointment date and time first.');
+      const lang = currentLang();
+      alert(lang === 'zh' ? '请选择预约日期和时间。' : (lang === 'ms' ? 'Sila pilih tarikh dan masa temu janji terlebih dahulu.' : 'Please select an appointment date and time first.'));
     }
   }
 
@@ -3781,7 +3855,8 @@ Please let me know if this slot is available. Thank you.`;
   // Update labels when language changes
   const btnEn = document.getElementById('btnEnglish');
   const btnZh = document.getElementById('btnChinese');
-  [btnEn, btnZh].forEach(b => {
+  const btnMs = document.getElementById('btnMalay');
+  [btnEn, btnZh, btnMs].forEach(b => {
     if(!b) return;
     b.addEventListener('click', () => setTimeout(updateWhatsAppLink, 0));
   });
@@ -3798,7 +3873,11 @@ Please let me know if this slot is available. Thank you.`;
   // Try to use the same number already in the href (https://wa.me/<number>)
   const base = floatBtn.href.split('?')[0];
 
-  function isChinese(){ return document.body.classList.contains('chinese-lang'); }
+  function currentLang(){
+    if(document.body.classList.contains('lang-zh')) return 'zh';
+    if(document.body.classList.contains('lang-ms')) return 'ms';
+    return 'en';
+  }
 
   function setPrefill(){
     const msgEn =
@@ -3815,7 +3894,15 @@ Thank you.`;
 
 谢谢。`;
 
-    const msg = isChinese() ? msgZh : msgEn;
+    const msgMs =
+`Hai AnaCoo Tailor,
+
+Saya ingin bertanya tentang perkhidmatan ubah suai pakaian. Boleh bantu beri maklumat?
+
+Terima kasih.`;
+
+    const lang = currentLang();
+    const msg = lang === 'zh' ? msgZh : (lang === 'ms' ? msgMs : msgEn);
 
     // WhatsApp supports ?text=... (must be URL-encoded)
     floatBtn.href = base + '?text=' + encodeURIComponent(msg);
@@ -3843,7 +3930,8 @@ Thank you.`;
   function hookLanguageButtons(){
     const btnEn = document.getElementById('btnEnglish');
     const btnZh = document.getElementById('btnChinese');
-    [btnEn, btnZh].forEach(b => {
+    const btnMs = document.getElementById('btnMalay');
+    [btnEn, btnZh, btnMs].forEach(b => {
       if(!b) return;
       b.addEventListener('click', () => setTimeout(setPrefill, 0));
     });
@@ -3901,31 +3989,34 @@ Thank you.`;
 </script>
 <script>
 /* ================================= */
-/* Language toggle (English / 中文)   */
+/* Language toggle (English / 中文 / BM) */
 /* ================================= */
 (function(){
   const btnEn = document.getElementById('btnEnglish');
   const btnZh = document.getElementById('btnChinese');
-  if(!btnEn || !btnZh) return;
+  const btnMs = document.getElementById('btnMalay');
+  if(!btnEn || !btnZh || !btnMs) return;
 
   function setLang(lang){
-    const isZh = (lang === 'zh');
-    document.body.classList.toggle('chinese-lang', isZh);
+    document.body.classList.remove('lang-en','lang-zh','lang-ms');
+    document.body.classList.add(`lang-${lang}`);
 
-    // Visual state
-    btnEn.classList.toggle('active', !isZh);
-    btnZh.classList.toggle('active', isZh);
+    btnEn.classList.toggle('active', lang === 'en');
+    btnZh.classList.toggle('active', lang === 'zh');
+    btnMs.classList.toggle('active', lang === 'ms');
 
-    // Accessibility state
-    btnEn.setAttribute('aria-pressed', String(!isZh));
-    btnZh.setAttribute('aria-pressed', String(isZh));
+    btnEn.setAttribute('aria-pressed', String(lang === 'en'));
+    btnZh.setAttribute('aria-pressed', String(lang === 'zh'));
+    btnMs.setAttribute('aria-pressed', String(lang === 'ms'));
   }
 
-  // Init: default to English unless body already has chinese-lang
-  setLang(document.body.classList.contains('chinese-lang') ? 'zh' : 'en');
+  const initialLang = document.body.classList.contains('lang-zh') ? 'zh' :
+    (document.body.classList.contains('lang-ms') ? 'ms' : 'en');
+  setLang(initialLang);
 
   btnEn.addEventListener('click', () => setLang('en'));
   btnZh.addEventListener('click', () => setLang('zh'));
+  btnMs.addEventListener('click', () => setLang('ms'));
 })();
 </script>
 <script>
@@ -3954,13 +4045,19 @@ Thank you.`;
   const sections = Array.from(document.querySelectorAll('section[id]'));
   const navLinks = Array.from(document.querySelectorAll('header nav a[href^="#"]'));
 
-  function isChinese(){ return document.body.classList.contains('chinese-lang'); }
+  function currentLang(){
+    if(document.body.classList.contains('lang-zh')) return 'zh';
+    if(document.body.classList.contains('lang-ms')) return 'ms';
+    return 'en';
+  }
 
   function syncAppointmentLabel(){
     if(!apptLink) return;
     const en = apptLink.getAttribute('data-en') || 'Make Appointment';
     const zh = apptLink.getAttribute('data-zh') || '预约';
-    apptLink.textContent = isChinese() ? zh : en;
+    const ms = apptLink.getAttribute('data-ms') || 'Tempah Janji';
+    const lang = currentLang();
+    apptLink.textContent = lang === 'zh' ? zh : (lang === 'ms' ? ms : en);
   }
 
   function setActive(link){
@@ -3998,7 +4095,8 @@ Thank you.`;
   // Re-sync label when language buttons are clicked
   const btnEn = document.getElementById('btnEnglish');
   const btnZh = document.getElementById('btnChinese');
-  [btnEn, btnZh].forEach(b => {
+  const btnMs = document.getElementById('btnMalay');
+  [btnEn, btnZh, btnMs].forEach(b => {
     if(!b) return;
     b.addEventListener('click', () => setTimeout(syncAppointmentLabel, 0));
   });
