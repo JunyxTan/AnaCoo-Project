@@ -1136,9 +1136,9 @@ align-items: center;
 padding: 6px 8px;
 border-radius: 999px;
 
-/* match logo pink */
-background: var(--primary);
-border: 1px solid var(--primary-dark);
+/* keep box neutral, apply pink to wording only */
+background: rgba(255,255,255,0.10);
+border: 1px solid rgba(255,255,255,0.22);
 backdrop-filter: blur(10px);
 -webkit-backdrop-filter: blur(10px);
 box-shadow: 0 8px 18px rgba(109,93,107,0.22);
@@ -1150,9 +1150,9 @@ box-shadow: 0 8px 18px rgba(109,93,107,0.22);
 }
 
 .lang-btn {
-border: 1px solid var(--primary-dark);
-background: var(--primary);
-color: #ffffff;
+border: 1px solid rgba(255,255,255,0.30);
+background: rgba(255,255,255,0.10);
+color: var(--primary);
 
 padding: 7px 12px;
 border-radius: 999px;
@@ -1166,12 +1166,14 @@ transition: 0.2s ease;
 }
 
 .lang-btn:hover {
-    background: var(--primary-dark);
+    background: rgba(255,255,255,0.20);
+    color: var(--primary-dark);
 }
 
 .lang-btn.active {
-background: var(--primary-dark);
-border-color: #b57d89;
+background: rgba(255,255,255,0.24);
+border-color: rgba(255,255,255,0.55);
+color: var(--primary-dark);
 }
 
 footer {
