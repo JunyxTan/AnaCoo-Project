@@ -1136,7 +1136,7 @@ align-items: center;
 padding: 6px 8px;
 border-radius: 999px;
 
-/* subtle glass look on header */
+/* keep box neutral, apply pink to wording only */
 background: rgba(255,255,255,0.10);
 border: 1px solid rgba(255,255,255,0.22);
 backdrop-filter: blur(10px);
@@ -1152,7 +1152,7 @@ box-shadow: 0 8px 18px rgba(0,0,0,0.10);
 .lang-btn {
 border: 1px solid rgba(255,255,255,0.30);
 background: rgba(255,255,255,0.10);
-color: #ffffff;
+color: var(--primary);
 
 padding: 7px 12px;
 border-radius: 999px;
@@ -1166,12 +1166,14 @@ transition: 0.2s ease;
 }
 
 .lang-btn:hover {
-    background: var(--light);
+    background: rgba(255,255,255,0.20);
+    color: var(--primary-dark);
 }
 
 .lang-btn.active {
-background: rgba(255,255,255,0.22);
+background: rgba(255,255,255,0.24);
 border-color: rgba(255,255,255,0.55);
+color: var(--primary-dark);
 }
 
 footer {
@@ -3191,7 +3193,7 @@ html, body{
 <div class="language-selector">
 <button aria-pressed="true" class="lang-btn active" id="btnEnglish" type="button">English</button>
 <button aria-pressed="false" class="lang-btn" id="btnChinese" type="button">中文</button>
-<button aria-pressed="false" class="lang-btn" id="btnMalay" type="button">Bahasa</button>
+<button aria-pressed="false" class="lang-btn" id="btnMalay" type="button">Malay</button>
 </div>
 <button aria-controls="primary-nav" aria-expanded="false" aria-label="Open menu" class="menu-toggle">
 <i aria-hidden="true" class="fas fa-bars"></i>
