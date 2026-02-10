@@ -312,6 +312,10 @@ color: white;
 text-decoration: none;
 opacity: 0.85;
 transition: 0.3s;
+position: relative;
+display: inline-flex;
+align-items: center;
+padding-bottom: 6px;
 }
 
 nav#primary-nav a:hover {
@@ -1963,8 +1967,7 @@ p{margin:0 0 12px;}
 
 /* Active navigation highlight */
 #primary-nav a.active{
-  border-bottom: 2px solid var(--gold);
-  padding-bottom: 4px;
+  font-weight: 700;
 }
 
 
@@ -4285,26 +4288,39 @@ Terima kasih.`;
     }
   }
 
-  // Scroll spy using IntersectionObserver
-  if('IntersectionObserver' in window && sections.length){
-    const map = new Map();
-    sections.forEach(sec => map.set(sec.id, sec));
-
-    const obs = new IntersectionObserver((entries) => {
-      // pick the most visible entry
-      const visible = entries
-        .filter(e => e.isIntersecting)
-        .sort((a,b) => b.intersectionRatio - a.intersectionRatio)[0];
-
-      if(!visible) return;
-
-      const id = visible.target.id;
-      const link = navLinks.find(a => a.getAttribute('href') === '#' + id);
-      if(link) setActive(link);
-    }, { root: null, threshold: [0.25, 0.35, 0.5, 0.6] });
-
-    sections.forEach(sec => obs.observe(sec));
+  function findNavLink(id){
+    const lang = currentLang();
+    const className = lang === 'zh' ? 'chinese' : (lang === 'ms' ? 'malay' : 'english');
+    return navLinks.find(a => a.getAttribute('href') === '#' + id && a.classList.contains(className));
   }
+
+  function updateActiveByScroll(){
+    if(!sections.length) return;
+    const header = document.querySelector('header');
+    const offset = (header ? header.offsetHeight : 0) + 24;
+    const scrollPos = window.scrollY + offset;
+    let current = sections[0];
+    sections.forEach(sec => {
+      if(sec.offsetTop <= scrollPos){
+        current = sec;
+      }
+    });
+    const link = findNavLink(current.id);
+    if(link) setActive(link);
+  }
+
+  let ticking = false;
+  function onScroll(){
+    if(ticking) return;
+    ticking = true;
+    window.requestAnimationFrame(() => {
+      updateActiveByScroll();
+      ticking = false;
+    });
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', updateActiveByScroll);
 
   // Re-sync label when language buttons are clicked
   const btnEn = document.getElementById('btnEnglish');
@@ -4312,11 +4328,17 @@ Terima kasih.`;
   const btnMs = document.getElementById('btnMalay');
   [btnEn, btnZh, btnMs].forEach(b => {
     if(!b) return;
-    b.addEventListener('click', () => setTimeout(syncAppointmentLabel, 0));
+    b.addEventListener('click', () => {
+      setTimeout(() => {
+        syncAppointmentLabel();
+        updateActiveByScroll();
+      }, 0);
+    });
   });
 
   // Initial
   syncAppointmentLabel();
+  updateActiveByScroll();
 })();
 </script>
 <script>
