@@ -2497,9 +2497,15 @@ body.lang-ms .time-display-text.malay{ display:inline; }
 }
 
 /* Inputs uniform */
-.appt-field input{
+.appt-field input,
+.appt-field textarea{
   height: 48px !important;
   border-radius: 12px !important;
+}
+.appt-field textarea{
+  min-height: 92px;
+  resize: vertical;
+  padding: 12px 14px;
 }
 .time-display{
   height: 48px !important;
@@ -3593,6 +3599,28 @@ html, body{
 </div>
 </div>
 </div>
+<div class="appt-row">
+<div class="appt-field">
+<label class="english" for="apptName">Your name</label>
+<label class="chinese" for="apptName">您的姓名</label>
+<label class="malay" for="apptName">Nama anda</label>
+<input autocomplete="name" id="apptName" name="apptName" placeholder="e.g., Nur Aisyah" type="text"/>
+</div>
+<div class="appt-field">
+<label class="english" for="apptPhone">Phone number</label>
+<label class="chinese" for="apptPhone">电话号码</label>
+<label class="malay" for="apptPhone">Nombor telefon</label>
+<input autocomplete="tel" id="apptPhone" name="apptPhone" placeholder="e.g., +60 12-345 6789" type="tel"/>
+</div>
+</div>
+<div class="appt-row">
+<div class="appt-field" style="flex:1 1 100%;">
+<label class="english" for="apptNotes">Notes (optional)</label>
+<label class="chinese" for="apptNotes">备注（可选）</label>
+<label class="malay" for="apptNotes">Nota (pilihan)</label>
+<textarea id="apptNotes" name="apptNotes" placeholder="Type request details (e.g., jeans hem, blazer sleeve adjustment)" rows="3"></textarea>
+</div>
+</div>
 <div class="appointment-action">
 <a class="btn appointment-btn" data-disabled="true" href="https://wa.me/60123608968" id="whatsappBookBtn">Pilih tarikh &amp; masa untuk teruskan</a>
 </div>
@@ -3682,8 +3710,14 @@ html, body{
   const dropdown = document.getElementById('apptTimeDropdown');
   const displayBtn = document.getElementById('apptTimeDisplay');
   const waBtn  = document.getElementById('whatsappBookBtn');
+  const nameEl = document.getElementById('apptName');
+  const phoneEl = document.getElementById('apptPhone');
+  const notesEl = document.getElementById('apptNotes');
 
   if(!dateEl || !timeHidden || !dropdown || !displayBtn) return;
+
+  const APPOINTMENT_API = (window.APPOINTMENT_API_BASE || '').replace(/\/$/, '') + '/api/appointments';
+  let isSubmitting = false;
 
   const OPEN_HOUR = 11;
   const CLOSE_HOUR = 22;
@@ -3705,6 +3739,41 @@ html, body{
   function formatDatePretty(yyyy_mm_dd){
     const dt = new Date(yyyy_mm_dd + 'T00:00:00');
     return dt.toLocaleDateString([], { weekday:'long', year:'numeric', month:'long', day:'numeric' });
+  }
+
+
+  function buildDateTimeRange(dateVal, timeVal){
+    const [hours, minutes] = timeVal.split(':').map(Number);
+    const start = new Date(dateVal + 'T00:00:00');
+    start.setHours(hours, minutes, 0, 0);
+    const end = new Date(start);
+    end.setMinutes(end.getMinutes() + 30);
+    return { start, end };
+  }
+
+  async function createCalendarEvent(dateVal, timeVal){
+    const { start, end } = buildDateTimeRange(dateVal, timeVal);
+    const payload = {
+      customerName: (nameEl?.value || '').trim(),
+      customerPhone: (phoneEl?.value || '').trim(),
+      notes: (notesEl?.value || '').trim(),
+      language: currentLang(),
+      startDateTime: start.toISOString(),
+      endDateTime: end.toISOString()
+    };
+
+    const response = await fetch(APPOINTMENT_API, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+
+    if(!response.ok){
+      const body = await response.json().catch(() => ({}));
+      throw new Error(body.error || 'Unable to create calendar appointment right now.');
+    }
+
+    return response.json();
   }
 
   function buildSlots(forDate){
@@ -3872,6 +3941,10 @@ const ap = h >= 12 ? 'PM' : 'AM';
 h = h % 12 || 12;
 const formattedTime = `${h}:${m} ${ap}`;
 
+    const customerName = (nameEl?.value || '').trim() || '-';
+    const customerPhone = (phoneEl?.value || '').trim() || '-';
+    const customerNotes = (notesEl?.value || '').trim() || '-';
+
     const rawEn =
 `Hi AnaCoo Tailor,
 
@@ -3879,6 +3952,9 @@ I would like to make an appointment for alteration service.
 
 ✧ Date: ${niceDate}
 ✧ Time: ${formattedTime}
+✧ Name: ${customerName}
+✧ Phone: ${customerPhone}
+✧ Notes: ${customerNotes}
 
 Please let me know if this slot is available. Thank you.`;
 
@@ -3889,6 +3965,9 @@ Please let me know if this slot is available. Thank you.`;
 
 ✧ 日期：${niceDate}
 ✧ 时间：${formattedTime}
+✧ 姓名：${customerName}
+✧ 电话：${customerPhone}
+✧ 备注：${customerNotes}
 
 请帮我确认这个时间是否可以，谢谢。`;
 
@@ -3899,6 +3978,9 @@ Saya ingin membuat temu janji untuk perkhidmatan ubah suai pakaian.
 
 ✧ Tarikh: ${niceDate}
 ✧ Masa: ${formattedTime}
+✧ Nama: ${customerName}
+✧ Telefon: ${customerPhone}
+✧ Nota: ${customerNotes}
 
 Sila maklumkan jika slot ini tersedia. Terima kasih.`;
 
@@ -3915,12 +3997,37 @@ Sila maklumkan jika slot ini tersedia. Terima kasih.`;
     }
   }
 
-  function guardClick(e){
+  async function guardClick(e){
     if(!waBtn) return;
+
     if(waBtn.dataset.disabled === 'true'){
       e.preventDefault();
       const lang = currentLang();
       alert(lang === 'zh' ? '请选择预约日期和时间。' : (lang === 'ms' ? 'Sila pilih tarikh dan masa temu janji terlebih dahulu.' : 'Please select an appointment date and time first.'));
+      return;
+    }
+
+    if(isSubmitting){
+      e.preventDefault();
+      return;
+    }
+
+    e.preventDefault();
+    isSubmitting = true;
+
+    const originalLabel = waBtn.innerText;
+    waBtn.innerText = currentLang() === 'zh' ? '提交中...' : (currentLang() === 'ms' ? 'Sedang dihantar...' : 'Submitting...');
+
+    try{
+      await createCalendarEvent(dateEl.value, timeHidden.value);
+      window.location.href = waBtn.href;
+    }catch(err){
+      const fallback = currentLang() === 'zh'
+        ? '暂时无法创建 Google 日历预约，请稍后再试。'
+        : (currentLang() === 'ms' ? 'Tidak dapat mencipta janji temu Google Calendar buat masa ini. Sila cuba lagi sebentar lagi.' : 'Unable to create a Google Calendar appointment right now. Please try again shortly.');
+      alert(err?.message || fallback);
+      waBtn.innerText = originalLabel;
+      isSubmitting = false;
     }
   }
 
@@ -3947,6 +4054,9 @@ Sila maklumkan jika slot ini tersedia. Terima kasih.`;
     ensureSelectableDate();
     renderTimeOptions();
     updateWhatsAppLink();
+  });
+  [nameEl, phoneEl, notesEl].forEach(field => {
+    if(field) field.addEventListener('input', updateWhatsAppLink);
   });
   if(waBtn) waBtn.addEventListener('click', guardClick);
 
