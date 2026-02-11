@@ -4055,13 +4055,35 @@ Sila maklumkan jika slot ini tersedia. Terima kasih.`;
     }
   }
 
-  // Toggle dropdown
-  displayBtn.addEventListener('click', () => {
+  // Toggle dropdown (with touch-safe propagation handling)
+  displayBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
     const isOpen = dropdown.classList.contains('open');
-    if(isOpen) closeDropdown(); else openDropdown();
+    if(isOpen){
+      closeDropdown();
+      return;
+    }
+    renderTimeOptions();
+    openDropdown();
   });
 
-  // Close on outside click
+  displayBtn.addEventListener('keydown', (e) => {
+    if(e.key !== 'Enter' && e.key !== ' ') return;
+    e.preventDefault();
+    const isOpen = dropdown.classList.contains('open');
+    if(isOpen){
+      closeDropdown();
+      return;
+    }
+    renderTimeOptions();
+    openDropdown();
+  });
+
+  dropdown.addEventListener('click', (e) => {
+    e.stopPropagation();
+  });
+
+  // Close on outside click / tap
   document.addEventListener('click', (e) => {
     if(!displayBtn.contains(e.target) && !dropdown.contains(e.target)){
       closeDropdown();
