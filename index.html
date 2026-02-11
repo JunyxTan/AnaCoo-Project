@@ -2679,6 +2679,15 @@ body.time-open .appointment-action a{
   box-shadow: none !important;
 }
 
+/* Keep the date/time row above subsequent fields while the time menu is open */
+#appointment .appt-row{
+  position: relative;
+  z-index: 1;
+}
+body.time-open #appointment .appt-row:first-of-type{
+  z-index: 30;
+}
+
 
 /* ============================= */
 /* Luxury global alignment pass  */
