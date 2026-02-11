@@ -48,3 +48,14 @@ The frontend appointment button now:
 2. Sends appointment data to `/api/appointments`.
 3. Creates a Google Calendar event.
 4. Redirects to WhatsApp for final confirmation message.
+
+
+## Why "Unable to create appointment" can happen
+
+This error appears when the website can load, but the backend API is unavailable or not configured:
+
+- Static hosting only (no Node server running), so `/api/appointments` returns `404`.
+- Missing Google environment variables in `.env`.
+- Calendar was not shared with the service account email.
+
+The frontend now falls back to WhatsApp booking if calendar auto-save fails, so customers can still confirm appointments manually.
