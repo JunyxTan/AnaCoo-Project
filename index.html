@@ -3837,7 +3837,7 @@ Gong Xi Fa Cai! 🧨🍊</p>
 <label class="english" for="apptNotes">Notes (optional)</label>
 <label class="chinese" for="apptNotes">备注（可选）</label>
 <label class="malay" for="apptNotes">Nota (pilihan)</label>
-<textarea id="apptNotes" name="apptNotes" placeholder="Type request details (e.g., jeans hem, blazer sleeve adjustment)" rows="3"></textarea>
+<textarea id="apptNotes" name="apptNotes" placeholder="Type request details (e.g., jeans hem, blazer sleeve adjustment)" data-placeholder-en="Type request details (e.g., jeans hem, blazer sleeve adjustment)" data-placeholder-zh="请输入修改需求详情（例如：牛仔裤改裤脚、西装袖长调整）" data-placeholder-ms="Taip butiran permintaan (contoh: labuh jeans, pelarasan lengan blazer)" rows="3"></textarea>
 </div>
 </div>
 <div class="appointment-action">
@@ -3943,6 +3943,17 @@ Gong Xi Fa Cai! 🧨🍊</p>
     if(document.body.classList.contains('lang-zh')) return 'zh';
     if(document.body.classList.contains('lang-ms')) return 'ms';
     return 'en';
+  }
+
+  function setNotesPlaceholder(){
+    if(!notesEl) return;
+    const lang = currentLang();
+    const text = lang === 'zh'
+      ? (notesEl.dataset.placeholderZh || notesEl.dataset.placeholderEn)
+      : (lang === 'ms'
+        ? (notesEl.dataset.placeholderMs || notesEl.dataset.placeholderEn)
+        : notesEl.dataset.placeholderEn);
+    if(text) notesEl.placeholder = text;
   }
 
   function to12h(h, m){
@@ -4241,8 +4252,13 @@ Sila maklumkan jika slot ini tersedia. Terima kasih.`;
   const btnMs = document.getElementById('btnMalay');
   [btnEn, btnZh, btnMs].forEach(b => {
     if(!b) return;
-    b.addEventListener('click', () => setTimeout(updateWhatsAppLink, 0));
+    b.addEventListener('click', () => {
+      setTimeout(updateWhatsAppLink, 0);
+      setTimeout(setNotesPlaceholder, 0);
+    });
   });
+
+  setNotesPlaceholder();
 })();
 </script>
 <script>
