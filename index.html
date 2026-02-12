@@ -3093,9 +3093,212 @@ html, body{
   opacity: 1 !important;
 }
 
+/* ============================= */
+/* Chinese New Year popup notice */
+/* ============================= */
+.cny-popup-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 3000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(35, 8, 8, 0.7);
+  backdrop-filter: blur(4px);
+}
+
+.cny-popup-overlay.hidden {
+  display: none;
+}
+
+.cny-popup-card {
+  width: min(96vw, 1240px);
+  max-height: min(90vh, 940px);
+  overflow-y: auto;
+  border-radius: 24px;
+  border: 1px solid rgba(255, 220, 130, 0.58);
+  box-shadow:
+    0 26px 60px rgba(0, 0, 0, 0.42),
+    inset 0 1px 0 rgba(255, 255, 255, 0.22);
+  color: #fff7ec;
+  text-align: left;
+  position: relative;
+  background:
+    radial-gradient(circle at 12% 8%, rgba(255, 225, 170, 0.24), transparent 36%),
+    radial-gradient(circle at 90% 18%, rgba(255, 195, 125, 0.2), transparent 34%),
+    linear-gradient(150deg, #7f1017 0%, #a4111b 42%, #5d0b12 100%);
+}
+
+.cny-popup-card::before {
+  content: "";
+  position: absolute;
+  inset: 12px;
+  border: 1px solid rgba(249, 216, 127, 0.4);
+  border-radius: 18px;
+  pointer-events: none;
+}
+
+.cny-popup-content {
+  position: relative;
+  z-index: 1;
+  padding: 34px 34px 28px;
+}
+
+.cny-popup-title {
+  text-align: center;
+  color: #ffd978;
+  font-size: clamp(24px, 3.2vw, 34px);
+  margin-bottom: 18px;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.cny-popup-body {
+  white-space: pre-line;
+  line-height: 1.7;
+  font-size: clamp(15px, 2vw, 17px);
+  color: #fff8ec;
+}
+
+.cny-language-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.cny-language-box {
+  background: linear-gradient(180deg, rgba(255, 245, 215, 0.13), rgba(255, 223, 160, 0.08));
+  border: 1px solid rgba(255, 223, 139, 0.38);
+  border-radius: 14px;
+  padding: 18px 16px;
+  min-height: 100%;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.16);
+}
+
+.cny-language-box .cny-popup-title {
+  font-size: clamp(18px, 1.45vw, 22px);
+  margin-bottom: 12px;
+}
+
+.cny-language-box .cny-popup-body {
+  font-size: clamp(13.5px, 0.96vw, 15px);
+  line-height: 1.62;
+}
+
+.cny-popup-close {
+  margin-top: 20px;
+  width: 100%;
+  border: 0;
+  border-radius: 999px;
+  padding: 12px 20px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #6f0f15;
+  background: linear-gradient(180deg, #ffe6a5, #f9cc63);
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.cny-popup-close:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.25);
+}
+
+.cny-decoration {
+  display: block;
+  text-align: center;
+  font-size: 21px;
+  letter-spacing: 4px;
+  margin-bottom: 10px;
+}
+
+@media (max-width: 1180px){
+  .cny-language-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px){
+  .cny-popup-card {
+    width: min(95vw, 1240px);
+    border-radius: 18px;
+  }
+
+  .cny-popup-content {
+    padding: 24px 20px 20px;
+  }
+
+  .cny-language-box {
+    padding: 14px 12px;
+  }
+
+  .cny-popup-body {
+    line-height: 1.6;
+  }
+}
+
 </style>
 </head>
 <body class="lang-en">
+<div aria-labelledby="cnyPopupTitle" aria-modal="true" class="cny-popup-overlay" id="cnyPopup" role="dialog">
+<div class="cny-popup-card">
+<div class="cny-popup-content">
+<span class="cny-decoration">🧨 🐎 🍊</span>
+<div class="cny-language-grid">
+<div class="cny-language-box">
+<h2 class="cny-popup-title" id="cnyPopupTitle">🧧 Chinese New Year Closure Notice 🧧</h2>
+<p class="cny-popup-body">Dear Valued Customers,
+
+In celebration of the Chinese New Year, we will be closed from 14 February 2026 (Saturday) to 22 February 2026 (Sunday).
+
+Business operations will resume on 23 February 2026 (Monday).
+
+All enquiries received during the holiday period will be attended to once we reopen.
+
+Thank you for your continuous support.
+Wishing you and your family a prosperous, joyful, and successful Year of the Horse! 🐎✨
+
+Gong Xi Fa Cai! 🧨🍊</p>
+</div>
+
+<div class="cny-language-box">
+<h2 class="cny-popup-title">🧧 农历新年休假通知 🧧</h2>
+<p class="cny-popup-body">尊敬的顾客，
+
+值此农历新年佳节，本店将于 2026年2月14日（星期六）至 2026年2月22日（星期日）休息。
+
+我们将于 2026年2月23日（星期一）恢复营业。
+
+假期期间收到的所有询问，我们将在恢复营业后尽快处理。
+
+感谢您一直以来的支持。
+祝您和家人马年兴旺、喜乐安康、万事顺利！🐎✨
+
+恭喜发财！🧨🍊</p>
+</div>
+
+<div class="cny-language-box">
+<h2 class="cny-popup-title">🧧 Notis Penutupan Tahun Baru Cina 🧧</h2>
+<p class="cny-popup-body">Pelanggan yang dihargai,
+
+Sempena sambutan Tahun Baru Cina, kami akan ditutup dari 14 Februari 2026 (Sabtu) hingga 22 Februari 2026 (Ahad).
+
+Operasi perniagaan akan disambung semula pada 23 Februari 2026 (Isnin).
+
+Semua pertanyaan yang diterima sepanjang tempoh cuti akan dilayan sebaik sahaja kami beroperasi semula.
+
+Terima kasih atas sokongan berterusan anda.
+Kami mengucapkan kepada anda dan keluarga Tahun Kuda yang makmur, gembira, dan penuh kejayaan! 🐎✨
+
+Gong Xi Fa Cai! 🧨🍊</p>
+</div>
+</div>
+
+<button class="cny-popup-close" id="cnyPopupClose" type="button">Close Notice</button>
+</div>
+</div>
+</div>
 <header>
 <div class="header-left">
 <div class="logo-container">
@@ -4439,6 +4642,32 @@ Terima kasih.`;
 
   // Initial run
   updateTimeOptions();
+})();
+</script>
+
+<script>
+/* ============================= */
+/* CNY popup behavior            */
+/* ============================= */
+(function(){
+  const popup = document.getElementById('cnyPopup');
+  const closeBtn = document.getElementById('cnyPopupClose');
+  if(!popup || !closeBtn) return;
+
+  function closePopup(){
+    popup.classList.add('hidden');
+  }
+
+  closeBtn.addEventListener('click', closePopup);
+  popup.addEventListener('click', function(e){
+    if(e.target === popup) closePopup();
+  });
+
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape' && !popup.classList.contains('hidden')){
+      closePopup();
+    }
+  });
 })();
 </script>
 
