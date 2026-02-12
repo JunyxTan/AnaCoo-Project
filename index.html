@@ -2506,11 +2506,18 @@ body.lang-ms .time-display-text.malay{ display:inline; }
   width: 100% !important;
   display: block;
   box-sizing: border-box;
-  min-height: 128px !important;
+  min-height: 96px !important;
   border-radius: 12px !important;
   resize: none;
-  padding: 14px 16px;
-  line-height: 1.55;
+  padding: 12px 14px;
+  line-height: 1.45;
+}
+
+.appt-field-notes{
+  grid-column: 1 / -1;
+  width: 100%;
+  max-width: none;
+  margin: 0;
 }
 .time-display{
   height: 48px !important;
@@ -3614,7 +3621,7 @@ html, body{
 </div>
 </div>
 <div class="appt-row">
-<div class="appt-field" style="flex:1 1 100%;">
+<div class="appt-field appt-field-notes">
 <label class="english" for="apptNotes">Notes (optional)</label>
 <label class="chinese" for="apptNotes">备注（可选）</label>
 <label class="malay" for="apptNotes">Nota (pilihan)</label>
