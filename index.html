@@ -2503,14 +2503,14 @@ body.lang-ms .time-display-text.malay{ display:inline; }
   border-radius: 12px !important;
 }
 .appt-field textarea{
-  width: 100%;
+  width: 100% !important;
   display: block;
   box-sizing: border-box;
-  min-height: 110px;
+  min-height: 128px !important;
   border-radius: 12px !important;
-  resize: vertical;
-  padding: 12px 14px;
-  line-height: 1.5;
+  resize: none;
+  padding: 14px 16px;
+  line-height: 1.55;
 }
 .time-display{
   height: 48px !important;
@@ -3614,20 +3614,6 @@ html, body{
 </div>
 </div>
 <div class="appt-row">
-<div class="appt-field">
-<label class="english" for="apptName">Your name</label>
-<label class="chinese" for="apptName">您的姓名</label>
-<label class="malay" for="apptName">Nama anda</label>
-<input autocomplete="name" id="apptName" name="apptName" placeholder="e.g., Nur Aisyah" type="text"/>
-</div>
-<div class="appt-field">
-<label class="english" for="apptPhone">Phone number</label>
-<label class="chinese" for="apptPhone">电话号码</label>
-<label class="malay" for="apptPhone">Nombor telefon</label>
-<input autocomplete="tel" id="apptPhone" name="apptPhone" placeholder="e.g., +60 12-345 6789" type="tel"/>
-</div>
-</div>
-<div class="appt-row">
 <div class="appt-field" style="flex:1 1 100%;">
 <label class="english" for="apptNotes">Notes (optional)</label>
 <label class="chinese" for="apptNotes">备注（可选）</label>
@@ -3724,8 +3710,6 @@ html, body{
   const dropdown = document.getElementById('apptTimeDropdown');
   const displayBtn = document.getElementById('apptTimeDisplay');
   const waBtn  = document.getElementById('whatsappBookBtn');
-  const nameEl = document.getElementById('apptName');
-  const phoneEl = document.getElementById('apptPhone');
   const notesEl = document.getElementById('apptNotes');
 
   if(!dateEl || !timeHidden || !dropdown || !displayBtn) return;
@@ -3920,8 +3904,6 @@ const ap = h >= 12 ? 'PM' : 'AM';
 h = h % 12 || 12;
 const formattedTime = `${h}:${m} ${ap}`;
 
-    const customerName = (nameEl?.value || '').trim() || '-';
-    const customerPhone = (phoneEl?.value || '').trim() || '-';
     const customerNotes = (notesEl?.value || '').trim() || '-';
 
     const rawEn =
@@ -3931,8 +3913,6 @@ I would like to make an appointment for alteration service.
 
 ✧ Date: ${niceDate}
 ✧ Time: ${formattedTime}
-✧ Name: ${customerName}
-✧ Phone: ${customerPhone}
 ✧ Notes: ${customerNotes}
 
 Please let me know if this slot is available. Thank you.`;
@@ -3944,8 +3924,6 @@ Please let me know if this slot is available. Thank you.`;
 
 ✧ 日期：${niceDate}
 ✧ 时间：${formattedTime}
-✧ 姓名：${customerName}
-✧ 电话：${customerPhone}
 ✧ 备注：${customerNotes}
 
 请帮我确认这个时间是否可以，谢谢。`;
@@ -3957,8 +3935,6 @@ Saya ingin membuat temu janji untuk perkhidmatan ubah suai pakaian.
 
 ✧ Tarikh: ${niceDate}
 ✧ Masa: ${formattedTime}
-✧ Nama: ${customerName}
-✧ Telefon: ${customerPhone}
 ✧ Nota: ${customerNotes}
 
 Sila maklumkan jika slot ini tersedia. Terima kasih.`;
@@ -4035,7 +4011,7 @@ Sila maklumkan jika slot ini tersedia. Terima kasih.`;
     renderTimeOptions();
     updateWhatsAppLink();
   });
-  [nameEl, phoneEl, notesEl].forEach(field => {
+  [notesEl].forEach(field => {
     if(field) field.addEventListener('input', updateWhatsAppLink);
   });
   if(waBtn) waBtn.addEventListener('click', guardClick);
