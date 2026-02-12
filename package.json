@@ -2,7 +2,7 @@
   "name": "anacoo-project",
   "version": "1.0.0",
   "private": true,
-  "description": "AnaCoo appointment integration with Google Calendar",
+  "description": "AnaCoo appointment website",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
@@ -10,7 +10,6 @@
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
-    "express": "^4.19.2",
-    "googleapis": "^144.0.0"
+    "express": "^4.19.2"
   }
 }

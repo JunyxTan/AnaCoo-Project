@@ -3730,8 +3730,6 @@ html, body{
 
   if(!dateEl || !timeHidden || !dropdown || !displayBtn) return;
 
-  const APPOINTMENT_API = (window.APPOINTMENT_API_BASE || '').replace(/\/$/, '') + '/api/appointments';
-  let isSubmitting = false;
 
   const OPEN_HOUR = 11;
   const CLOSE_HOUR = 22;
@@ -3756,48 +3754,6 @@ html, body{
   }
 
 
-  function buildDateTimeRange(dateVal, timeVal){
-    const [hours, minutes] = timeVal.split(':').map(Number);
-    const start = new Date(dateVal + 'T00:00:00');
-    start.setHours(hours, minutes, 0, 0);
-    const end = new Date(start);
-    end.setMinutes(end.getMinutes() + 30);
-    return { start, end };
-  }
-
-  async function createCalendarEvent(dateVal, timeVal){
-    const { start, end } = buildDateTimeRange(dateVal, timeVal);
-    const payload = {
-      customerName: (nameEl?.value || '').trim(),
-      customerPhone: (phoneEl?.value || '').trim(),
-      notes: (notesEl?.value || '').trim(),
-      language: currentLang(),
-      startDateTime: start.toISOString(),
-      endDateTime: end.toISOString()
-    };
-
-    let response;
-    try{
-      response = await fetch(APPOINTMENT_API, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-      });
-    }catch(networkErr){
-      const err = new Error('calendar_unreachable');
-      err.code = 'calendar_unreachable';
-      throw err;
-    }
-
-    if(!response.ok){
-      const body = await response.json().catch(() => ({}));
-      const err = new Error(body.error || 'calendar_failed');
-      err.code = response.status === 404 ? 'calendar_not_configured' : 'calendar_failed';
-      throw err;
-    }
-
-    return response.json();
-  }
 
   function buildSlots(forDate){
     const slots = [];
@@ -4020,7 +3976,8 @@ Sila maklumkan jika slot ini tersedia. Terima kasih.`;
     }
   }
 
-  async function guardClick(e){
+
+  function guardClick(e){
     if(!waBtn) return;
 
     if(waBtn.dataset.disabled === 'true'){
@@ -4029,43 +3986,8 @@ Sila maklumkan jika slot ini tersedia. Terima kasih.`;
       alert(lang === 'zh' ? '请选择预约日期和时间。' : (lang === 'ms' ? 'Sila pilih tarikh dan masa temu janji terlebih dahulu.' : 'Please select an appointment date and time first.'));
       return;
     }
-
-    if(isSubmitting){
-      e.preventDefault();
-      return;
-    }
-
-    e.preventDefault();
-    isSubmitting = true;
-
-    const originalLabel = waBtn.innerText;
-    waBtn.innerText = currentLang() === 'zh' ? '提交中...' : (currentLang() === 'ms' ? 'Sedang dihantar...' : 'Submitting...');
-
-    try{
-      await createCalendarEvent(dateEl.value, timeHidden.value);
-      window.location.href = waBtn.href;
-      return;
-    }catch(err){
-      const lang = currentLang();
-      const warnNotConfigured = lang === 'zh'
-        ? 'Google 日历自动写入尚未完成服务器部署，将继续跳转 WhatsApp 手动确认。'
-        : (lang === 'ms'
-          ? 'Sistem Google Calendar belum dikonfigurasi sepenuhnya di server. Anda akan diteruskan ke WhatsApp untuk pengesahan manual.'
-          : 'Google Calendar auto-save is not configured on the server yet. You will continue to WhatsApp for manual confirmation.');
-      const warnUnavailable = lang === 'zh'
-        ? '暂时无法连接 Google 日历服务。将继续跳转 WhatsApp 进行手动确认。'
-        : (lang === 'ms'
-          ? 'Perkhidmatan Google Calendar tidak dapat dicapai buat masa ini. Anda akan diteruskan ke WhatsApp untuk pengesahan manual.'
-          : 'Google Calendar service is temporarily unavailable. You will continue to WhatsApp for manual confirmation.');
-
-      alert(err?.code === 'calendar_not_configured' ? warnNotConfigured : warnUnavailable);
-      window.location.href = waBtn.href;
-      return;
-    } finally {
-      waBtn.innerText = originalLabel;
-      isSubmitting = false;
-    }
   }
+
 
   // Toggle dropdown (with touch-safe propagation handling)
   displayBtn.addEventListener('click', (e) => {
