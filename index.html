@@ -44,14 +44,28 @@ body{
 }
 
 .closure-popup-card{
-    width: min(100%, 520px);
-    background: linear-gradient(145deg, rgba(255,255,255,0.98), rgba(249,243,244,0.98));
-    border: 1px solid rgba(216,167,177,0.35);
-    border-radius: 24px;
-    box-shadow: 0 24px 60px rgba(70, 50, 59, 0.26);
-    padding: 32px 28px;
+    width: min(100%, 540px);
+    background:
+        radial-gradient(circle at top, rgba(216,167,177,0.14), transparent 42%),
+        linear-gradient(145deg, rgba(255,255,255,0.99), rgba(249,243,244,0.98));
+    border: 1px solid rgba(216,167,177,0.3);
+    border-radius: 28px;
+    box-shadow: 0 28px 70px rgba(70, 50, 59, 0.24);
     position: relative;
     text-align: center;
+    padding: 38px 34px 30px;
+    overflow: hidden;
+}
+
+.closure-popup-card:before{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 28px;
+    right: 28px;
+    height: 4px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, var(--secondary), var(--primary), var(--primary-dark));
 }
 
 .closure-popup-badge{
@@ -66,21 +80,94 @@ body{
     font-weight: 600;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    margin-bottom: 18px;
+    margin-bottom: 22px;
 }
 
 .closure-popup h2{
     color: var(--dark);
-    font-size: 32px;
-    line-height: 1.2;
-    margin-bottom: 12px;
+    font-size: 34px;
+    line-height: 1.14;
+    margin-bottom: 14px;
+    max-width: 11ch;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .closure-popup p{
     color: var(--text);
-    font-size: 17px;
-    line-height: 1.7;
-    margin-bottom: 12px;
+    font-size: 16px;
+    line-height: 1.65;
+    margin-bottom: 0;
+}
+
+.closure-popup-lead{
+    max-width: 34ch;
+    margin: 0 auto 24px;
+}
+
+.closure-popup-dates{
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+    margin: 0 0 22px;
+}
+
+.closure-popup-date-card{
+    background: rgba(255,255,255,0.72);
+    border: 1px solid rgba(216,167,177,0.22);
+    border-radius: 20px;
+    padding: 16px 14px;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.6);
+}
+
+.closure-popup-date-label{
+    display: block;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--primary-dark);
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.closure-popup-date-value{
+    display: block;
+    color: var(--dark);
+    font-size: 23px;
+    font-weight: 700;
+    line-height: 1.15;
+}
+
+.closure-popup-return{
+    margin: 0 auto 24px;
+    padding: 16px 18px;
+    background: rgba(216,167,177,0.1);
+    border: 1px solid rgba(216,167,177,0.22);
+    border-radius: 18px;
+    max-width: 360px;
+}
+
+.closure-popup-return-label{
+    display: block;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--primary-dark);
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.closure-popup-return-date{
+    display: block;
+    color: var(--dark);
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 1.15;
+}
+
+.closure-popup-note{
+    max-width: 26ch;
+    margin: 0 auto 22px;
 }
 
 .closure-popup strong{
@@ -99,6 +186,7 @@ body{
     cursor: pointer;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
     box-shadow: 0 10px 20px rgba(216,167,177,0.28);
+    margin: 0 auto;
 }
 
 .closure-popup-close:hover{
@@ -112,16 +200,26 @@ body{
     }
 
     .closure-popup-card{
-        padding: 28px 20px;
-        border-radius: 20px;
+        padding: 32px 20px 24px;
+        border-radius: 22px;
     }
 
     .closure-popup h2{
-        font-size: 26px;
+        font-size: 27px;
     }
 
     .closure-popup p{
         font-size: 16px;
+    }
+
+    .closure-popup-dates{
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .closure-popup-date-value,
+    .closure-popup-return-date{
+        font-size: 21px;
     }
 }
 
@@ -3210,16 +3308,54 @@ html, body{
 <span class="malay">Notis Sementara</span>
 </div>
 <h2 id="closurePopupTitle">
-<span class="english">AnaCoo will be closed on 18 May and 19 May</span>
-<span class="chinese">AnaCoo 将于 5 月 18 日和 5 月 19 日暂停营业</span>
-<span class="malay">AnaCoo akan ditutup pada 18 Mei dan 19 Mei</span>
+<span class="english">AnaCoo Temporary Closure</span>
+<span class="chinese">AnaCoo 暂停营业通知</span>
+<span class="malay">Notis Penutupan Sementara AnaCoo</span>
 </h2>
-<p>
-<span class="english">We will be back and ready to serve you on <strong>20 May</strong>.</span>
-<span class="chinese">我们将于 <strong>5 月 20 日</strong>恢复营业并继续为您服务。</span>
-<span class="malay">Kami akan kembali beroperasi dan sedia melayani anda pada <strong>20 Mei</strong>.</span>
+<p class="closure-popup-lead">
+<span class="english">Please note that our store will be closed for two days.</span>
+<span class="chinese">敬请留意，本店将暂停营业两天。</span>
+<span class="malay">Harap maklum bahawa kedai kami akan ditutup selama dua hari.</span>
 </p>
-<p>
+<div class="closure-popup-dates">
+<div class="closure-popup-date-card">
+<span class="closure-popup-date-label">
+<span class="english">Closed</span>
+<span class="chinese">休息日</span>
+<span class="malay">Tutup</span>
+</span>
+<span class="closure-popup-date-value">
+<span class="english">18 May</span>
+<span class="chinese">5 月 18 日</span>
+<span class="malay">18 Mei</span>
+</span>
+</div>
+<div class="closure-popup-date-card">
+<span class="closure-popup-date-label">
+<span class="english">Closed</span>
+<span class="chinese">休息日</span>
+<span class="malay">Tutup</span>
+</span>
+<span class="closure-popup-date-value">
+<span class="english">19 May</span>
+<span class="chinese">5 月 19 日</span>
+<span class="malay">19 Mei</span>
+</span>
+</div>
+</div>
+<div class="closure-popup-return">
+<span class="closure-popup-return-label">
+<span class="english">Back On</span>
+<span class="chinese">恢复营业</span>
+<span class="malay">Kembali Beroperasi</span>
+</span>
+<span class="closure-popup-return-date">
+<span class="english">20 May</span>
+<span class="chinese">5 月 20 日</span>
+<span class="malay">20 Mei</span>
+</span>
+</div>
+<p class="closure-popup-note">
 <span class="english">Thank you for your understanding.</span>
 <span class="chinese">感谢您的理解与支持。</span>
 <span class="malay">Terima kasih atas pemahaman anda.</span>
