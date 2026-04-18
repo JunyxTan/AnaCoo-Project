@@ -83,12 +83,16 @@ body{
     margin-bottom: 22px;
 }
 
+.closure-popup-badge-text{
+    display: block;
+}
+
 .closure-popup h2{
     color: var(--dark);
     font-size: 34px;
     line-height: 1.14;
     margin-bottom: 14px;
-    max-width: 11ch;
+    max-width: 13ch;
     margin-left: auto;
     margin-right: auto;
 }
@@ -101,8 +105,44 @@ body{
 }
 
 .closure-popup-lead{
-    max-width: 34ch;
+    max-width: 42ch;
     margin: 0 auto 24px;
+}
+
+.closure-popup-lang-stack{
+    display: grid;
+    gap: 8px;
+}
+
+.closure-popup-lang-line{
+    display: block;
+}
+
+.closure-popup-badge .closure-popup-lang-line{
+    display: inline;
+}
+
+.closure-popup h2 .closure-popup-lang-line + .closure-popup-lang-line{
+    margin-top: 6px;
+}
+
+.closure-popup-lead .closure-popup-lang-line + .closure-popup-lang-line,
+.closure-popup-note .closure-popup-lang-line + .closure-popup-lang-line{
+    margin-top: 4px;
+}
+
+.closure-popup-lang-line.primary-lang{
+    color: var(--dark);
+    font-weight: 700;
+}
+
+.closure-popup-lang-line.secondary-lang{
+    color: rgba(90,77,77,0.92);
+    font-size: 0.96em;
+}
+
+.closure-popup-badge .secondary-lang{
+    font-size: 0.92em;
 }
 
 .closure-popup-dates{
@@ -166,7 +206,7 @@ body{
 }
 
 .closure-popup-note{
-    max-width: 26ch;
+    max-width: 34ch;
     margin: 0 auto 22px;
 }
 
@@ -210,6 +250,10 @@ body{
 
     .closure-popup p{
         font-size: 16px;
+    }
+
+    .closure-popup h2 .closure-popup-lang-line + .closure-popup-lang-line{
+        margin-top: 4px;
     }
 
     .closure-popup-dates{
@@ -3303,67 +3347,63 @@ html, body{
 <div class="closure-popup-card">
 <div class="closure-popup-badge">
 <i aria-hidden="true" class="fas fa-store-slash"></i>
-<span class="english">Temporary Notice</span>
-<span class="chinese">临时通知</span>
-<span class="malay">Notis Sementara</span>
+<span class="closure-popup-badge-text">Temporary Notice / 临时通知 / Notis Sementara</span>
 </div>
-<h2 id="closurePopupTitle">
-<span class="english">AnaCoo Temporary Closure</span>
-<span class="chinese">AnaCoo 暂停营业通知</span>
-<span class="malay">Notis Penutupan Sementara AnaCoo</span>
+<h2 class="closure-popup-lang-stack" id="closurePopupTitle">
+<span class="closure-popup-lang-line primary-lang">AnaCoo Temporary Closure</span>
+<span class="closure-popup-lang-line secondary-lang">AnaCoo 暂停营业通知</span>
+<span class="closure-popup-lang-line secondary-lang">Notis Penutupan Sementara AnaCoo</span>
 </h2>
-<p class="closure-popup-lead">
-<span class="english">Please note that our store will be closed for two days.</span>
-<span class="chinese">敬请留意，本店将暂停营业两天。</span>
-<span class="malay">Harap maklum bahawa kedai kami akan ditutup selama dua hari.</span>
+<p class="closure-popup-lead closure-popup-lang-stack">
+<span class="closure-popup-lang-line primary-lang">Please note that our store will be closed for two days.</span>
+<span class="closure-popup-lang-line secondary-lang">敬请留意，本店将暂停营业两天。</span>
+<span class="closure-popup-lang-line secondary-lang">Harap maklum bahawa kedai kami akan ditutup selama dua hari.</span>
 </p>
 <div class="closure-popup-dates">
 <div class="closure-popup-date-card">
-<span class="closure-popup-date-label">
-<span class="english">Closed</span>
-<span class="chinese">休息日</span>
-<span class="malay">Tutup</span>
+<span class="closure-popup-date-label closure-popup-lang-stack">
+<span class="closure-popup-lang-line primary-lang">Closed</span>
+<span class="closure-popup-lang-line secondary-lang">休息日</span>
+<span class="closure-popup-lang-line secondary-lang">Tutup</span>
 </span>
-<span class="closure-popup-date-value">
-<span class="english">18 May</span>
-<span class="chinese">5 月 18 日</span>
-<span class="malay">18 Mei</span>
+<span class="closure-popup-date-value closure-popup-lang-stack">
+<span class="closure-popup-lang-line primary-lang">18 May</span>
+<span class="closure-popup-lang-line secondary-lang">5 月 18 日</span>
+<span class="closure-popup-lang-line secondary-lang">18 Mei</span>
 </span>
 </div>
 <div class="closure-popup-date-card">
-<span class="closure-popup-date-label">
-<span class="english">Closed</span>
-<span class="chinese">休息日</span>
-<span class="malay">Tutup</span>
+<span class="closure-popup-date-label closure-popup-lang-stack">
+<span class="closure-popup-lang-line primary-lang">Closed</span>
+<span class="closure-popup-lang-line secondary-lang">休息日</span>
+<span class="closure-popup-lang-line secondary-lang">Tutup</span>
 </span>
-<span class="closure-popup-date-value">
-<span class="english">19 May</span>
-<span class="chinese">5 月 19 日</span>
-<span class="malay">19 Mei</span>
+<span class="closure-popup-date-value closure-popup-lang-stack">
+<span class="closure-popup-lang-line primary-lang">19 May</span>
+<span class="closure-popup-lang-line secondary-lang">5 月 19 日</span>
+<span class="closure-popup-lang-line secondary-lang">19 Mei</span>
 </span>
 </div>
 </div>
 <div class="closure-popup-return">
-<span class="closure-popup-return-label">
-<span class="english">Back On</span>
-<span class="chinese">恢复营业</span>
-<span class="malay">Kembali Beroperasi</span>
+<span class="closure-popup-return-label closure-popup-lang-stack">
+<span class="closure-popup-lang-line primary-lang">Back On</span>
+<span class="closure-popup-lang-line secondary-lang">恢复营业</span>
+<span class="closure-popup-lang-line secondary-lang">Kembali Beroperasi</span>
 </span>
-<span class="closure-popup-return-date">
-<span class="english">20 May</span>
-<span class="chinese">5 月 20 日</span>
-<span class="malay">20 Mei</span>
+<span class="closure-popup-return-date closure-popup-lang-stack">
+<span class="closure-popup-lang-line primary-lang">20 May</span>
+<span class="closure-popup-lang-line secondary-lang">5 月 20 日</span>
+<span class="closure-popup-lang-line secondary-lang">20 Mei</span>
 </span>
 </div>
-<p class="closure-popup-note">
-<span class="english">Thank you for your understanding.</span>
-<span class="chinese">感谢您的理解与支持。</span>
-<span class="malay">Terima kasih atas pemahaman anda.</span>
+<p class="closure-popup-note closure-popup-lang-stack">
+<span class="closure-popup-lang-line primary-lang">Thank you for your understanding.</span>
+<span class="closure-popup-lang-line secondary-lang">感谢您的理解与支持。</span>
+<span class="closure-popup-lang-line secondary-lang">Terima kasih atas pemahaman anda.</span>
 </p>
 <button class="closure-popup-close" id="closurePopupClose" type="button">
-<span class="english">Close</span>
-<span class="chinese">关闭</span>
-<span class="malay">Tutup</span>
+Close / 关闭 / Tutup
 </button>
 </div>
 </div>
