@@ -22,6 +22,109 @@ body{
 
 }
 
+.closure-popup{
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    background: rgba(63, 50, 58, 0.62);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 3000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.25s ease, visibility 0.25s ease;
+}
+
+.closure-popup.is-visible{
+    opacity: 1;
+    visibility: visible;
+}
+
+.closure-popup-card{
+    width: min(100%, 520px);
+    background: linear-gradient(145deg, rgba(255,255,255,0.98), rgba(249,243,244,0.98));
+    border: 1px solid rgba(216,167,177,0.35);
+    border-radius: 24px;
+    box-shadow: 0 24px 60px rgba(70, 50, 59, 0.26);
+    padding: 32px 28px;
+    position: relative;
+    text-align: center;
+}
+
+.closure-popup-badge{
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 16px;
+    border-radius: 999px;
+    background: rgba(216,167,177,0.14);
+    color: var(--dark);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 18px;
+}
+
+.closure-popup h2{
+    color: var(--dark);
+    font-size: 32px;
+    line-height: 1.2;
+    margin-bottom: 12px;
+}
+
+.closure-popup p{
+    color: var(--text);
+    font-size: 17px;
+    line-height: 1.7;
+    margin-bottom: 12px;
+}
+
+.closure-popup strong{
+    color: var(--primary-dark);
+}
+
+.closure-popup-close{
+    border: none;
+    background: var(--primary);
+    color: var(--white);
+    border-radius: 999px;
+    padding: 12px 24px;
+    min-width: 160px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 10px 20px rgba(216,167,177,0.28);
+}
+
+.closure-popup-close:hover{
+    transform: translateY(-2px);
+    box-shadow: 0 14px 24px rgba(216,167,177,0.34);
+}
+
+@media (max-width: 640px){
+    .closure-popup{
+        padding: 18px;
+    }
+
+    .closure-popup-card{
+        padding: 28px 20px;
+        border-radius: 20px;
+    }
+
+    .closure-popup h2{
+        font-size: 26px;
+    }
+
+    .closure-popup p{
+        font-size: 16px;
+    }
+}
+
 /* Global copy alignment */
 section, .section, .price-header, .payment-header, .contact-info, footer {
     text-align: left;
@@ -3098,6 +3201,36 @@ html, body{
 </style>
 </head>
 <body class="lang-en">
+<div aria-labelledby="closurePopupTitle" aria-modal="true" class="closure-popup" id="closurePopup" role="dialog">
+<div class="closure-popup-card">
+<div class="closure-popup-badge">
+<i aria-hidden="true" class="fas fa-store-slash"></i>
+<span class="english">Temporary Notice</span>
+<span class="chinese">临时通知</span>
+<span class="malay">Notis Sementara</span>
+</div>
+<h2 id="closurePopupTitle">
+<span class="english">AnaCoo will be closed on 18 May and 19 May</span>
+<span class="chinese">AnaCoo 将于 5 月 18 日和 5 月 19 日暂停营业</span>
+<span class="malay">AnaCoo akan ditutup pada 18 Mei dan 19 Mei</span>
+</h2>
+<p>
+<span class="english">We will be back and ready to serve you on <strong>20 May</strong>.</span>
+<span class="chinese">我们将于 <strong>5 月 20 日</strong>恢复营业并继续为您服务。</span>
+<span class="malay">Kami akan kembali beroperasi dan sedia melayani anda pada <strong>20 Mei</strong>.</span>
+</p>
+<p>
+<span class="english">Thank you for your understanding.</span>
+<span class="chinese">感谢您的理解与支持。</span>
+<span class="malay">Terima kasih atas pemahaman anda.</span>
+</p>
+<button class="closure-popup-close" id="closurePopupClose" type="button">
+<span class="english">Close</span>
+<span class="chinese">关闭</span>
+<span class="malay">Tutup</span>
+</button>
+</div>
+</div>
 <header>
 <div class="header-left">
 <div class="logo-container">
@@ -4316,6 +4449,50 @@ Terima kasih.`;
   updateActiveByScroll();
 })();
 </script>
+<script>
+/* ================================= */
+/* Closure popup notice              */
+/* ================================= */
+(function(){
+  const popup = document.getElementById('closurePopup');
+  const closeBtn = document.getElementById('closurePopupClose');
+  const storageKey = 'anacoo-closure-popup-dismissed-2026-05-20';
+
+  if(!popup || !closeBtn) return;
+
+  function closePopup(){
+    popup.classList.remove('is-visible');
+  }
+
+  function openPopup(){
+    popup.classList.add('is-visible');
+  }
+
+  if(!window.localStorage || localStorage.getItem(storageKey) !== 'true'){
+    window.requestAnimationFrame(openPopup);
+  }
+
+  closeBtn.addEventListener('click', () => {
+    if(window.localStorage){
+      localStorage.setItem(storageKey, 'true');
+    }
+    closePopup();
+  });
+
+  popup.addEventListener('click', (event) => {
+    if(event.target === popup){
+      closeBtn.click();
+    }
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if(event.key === 'Escape' && popup.classList.contains('is-visible')){
+      closeBtn.click();
+    }
+  });
+})();
+</script>
+
 <script>
 /* ================================= */
 /* Home carousel auto-slide          */
